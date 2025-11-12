@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('nama')->unique();
             $table->timestamps();
         });
-    }
 
-    /**
-     * Reverse the migrations.
-     */
+        Schema::table('spot', function (Blueprint $table) {
+            // Insert spot data
+        });
+    }
     public function down(): void
     {
         Schema::dropIfExists('spot');
