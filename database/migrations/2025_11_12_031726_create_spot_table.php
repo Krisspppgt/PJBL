@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('spot', function (Blueprint $table) {
             $table->id();
+            $table->string('nama')->unique();
             $table->timestamps();
         });
     }
