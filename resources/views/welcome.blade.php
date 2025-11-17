@@ -20,37 +20,28 @@
             </style>
         @endif
     </head>
-    <body class="min-h-screen flex items-center justify-center bg-gradient-to-bl from-blue-900 via-blue-200 to-blue-800 px-4">
+    <body class="min-h-screen flex items-center justify-center bg-gradient-to-bl from-blue-900 via-blue-200 to-blue-800 px-4 ">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 ">
-            <h2 class="text-5xl font-bold text-center mb-4 text-blue-500">
+            <h2 class="text-5xl font-bold text-center mb-4 text-blue-500 p-5">
                 Welcome to
             </h2>
-            <img src="{{ asset('images/logo.jpeg') }}" alt="PJBL Logo" class="mx-auto mb-6 w-32 h-32"/>
+            <img src="{{ asset('images/logo.jpeg') }}" alt="PJBL Logo" class="mx-auto mb-6 w-32 h-32 "/>
             @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
+                <nav class="flex flex-col items-center gap-2 font-bold">
                         <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            class="ms-3 rounded w-full p-2 text-center bg-gradient-to-br from-blue-600 to-blue-300 justify-center"
                         >
-                            Log in
+                            Login
                         </a>
 
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
+                                class="ms-3 w-full rounded p-2 text-center text-blue-900 bg-white justify-center">
+                                <span>Dont Have An Account?</span> Sign Up!
                             </a>
                         @endif
-                    @endauth
                 </nav>
             @endif
         </header>
