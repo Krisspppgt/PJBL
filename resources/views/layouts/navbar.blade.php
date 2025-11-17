@@ -5,13 +5,13 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
 <body>
-    <nav class="bg-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ url('/') }}" class="text-xl font-bold text-blue-600">Lokal Spot</a>
-            <div>
-                <a href="{{ route('homepage') }}" class="text-gray-700 hover:text-blue-600 mx-2">Home</a>
-                <a href="#" class="text-gray-700 hover:text-blue-600 mx-2">About</a>
-                <a href="#" class="text-gray-700 hover:text-blue-600 mx-2">Contact</a>
+    <nav class="bg-blue-900 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center ">
+            <img src="{{ asset('images/logo.jpeg') }}" alt="Lokal Spot Logo" class="w-10 h-10 rounded-full ">Lokal Spot
+            <div class="text-white">    
+                <a href="{{ route('homepage') }}" class="text-white hover:text-blue-600 mx-2">Home</a>
+                <a href="#" class="mx-2 hover:text-blue-600">About</a>
+                <a href="#" class="mx-2 hover:text-blue-600">Contact</a>
             </div>
         </div>
     </nav>

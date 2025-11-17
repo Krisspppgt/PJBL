@@ -6,7 +6,8 @@
         @include('layouts.navbar')
     </head>
 <body>
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-500 to-green-500">
+    <div class="min-h-screen flex items-center justify-center bg-white">
+        <img src="{{ asset('images/logo.jpeg') }}" alt="Homepage Image" class="max-w-full h-auto rounded-lg shadow-lg">
     </div>
 </body>
 </html>
