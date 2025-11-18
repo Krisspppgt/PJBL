@@ -38,6 +38,7 @@
                         autofocus
                         autocomplete="username"
                         class="block mt-1 w-full"
+                        placeholder="masukkan email"
                     />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
@@ -54,6 +55,7 @@
             name="password"
             required 
             autocomplete="new-password"
+            placeholder="masukkan password"
         />
 
         <!-- Icon Toggle -->
