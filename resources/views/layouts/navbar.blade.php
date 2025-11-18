@@ -11,6 +11,9 @@
                 <img src="{{ asset('images/logo.jpeg') }}" alt="Lokal Spot Logo" class="w-10 h-10 rounded-full "> Lokal Spot
             </div>
         </div>
+        <div class="text-white text-lg font-medium">
+            <a href="">Home</a>
+        </div>
 
         <div class="hidden sm:flex sm:items-center sm:ms-6">
             <x-dropdown align="right" width="48">

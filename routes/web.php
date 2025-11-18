@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/homepage', function () {
         return view('page.homepage');
     })->name('homepage');
+    Route::get('/information', function () {
+        return view('page.information');
+    })->name('information');
 });
 
 require __DIR__.'/auth.php';
