@@ -5,7 +5,9 @@
         <script src="https://cdn.tailwindcss.com"></script>
         @include('layouts.navbar')
     </head>
-<body> 
-    
-</body>
+    <body> 
+        <div class="bg-white">
+
+        </div>
+    </body>
 </html>
