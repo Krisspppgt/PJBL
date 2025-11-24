@@ -1,26 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuestController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Guest Routes
+Route::get('/', [GuestController::class, 'index'])->name('guest.home');
+Route::get('/place/{id}', [GuestController::class, 'show'])->name('guest.place.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Auth Routes (jika belum ada)
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/homepage', function () {
-        return view('page.homepage');
-    })->name('homepage');
-    Route::get('/information', function () {
-        return view('page.information');
-    })->name('information');
-});
-
-require __DIR__.'/auth.php';
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');

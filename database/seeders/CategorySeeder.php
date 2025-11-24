@@ -1,7 +1,9 @@
 <?php
 
-namespace CategorySeeder;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -18,5 +20,7 @@ class CategorySeeder extends Seeder
            ['nama' => 'Drink Area'],
            ['nama' => 'Catering'],
        ];
+
+       DB::table('kategori')->insert($kategori);
     }
 }

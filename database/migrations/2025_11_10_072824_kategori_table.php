@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -21,7 +22,7 @@ return new class extends Migration
             // Insert kategori data
         });
 
-        \DB::table('kategori')->insert([
+        DB::table('kategori')->insert([
             ['nama' => 'Cafe', 'created_at' => now(), 'updated_at' => now()],
             ['nama' => 'Restaurant', 'created_at' => now(), 'updated_at' => now()],
             ['nama' => 'Street Food', 'created_at' => now(), 'updated_at' => now()],
