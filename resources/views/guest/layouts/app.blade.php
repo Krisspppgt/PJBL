@@ -6,160 +6,46 @@
     <title>LocalSpot - @yield('title', 'Temukan Tempat Terbaik')</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        /* Navbar */
-        .navbar {
-            background-color: #2c3e50;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .navbar-menu {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .navbar-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .navbar-menu a:hover {
-            color: #f39c12;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-login {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-login:hover {
-            background-color: white;
-            color: #2c3e50;
-        }
-
-        .btn-register {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        .btn-register:hover {
-            background-color: #e67e22;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #f39c12;
-        }
-
-        .footer-section p {
-            line-height: 1.6;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
     @yield('styles')
 </head>
-<body>
+<body class="font-poppins bg-gray-100 text-gray-800">
+
     <!-- Navbar -->
-    <nav class="navbar">
-        <a href="/" class="navbar-brand">
+    <nav class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 shadow-md p-4 md:px-8 flex justify-between items-center z-50 relative">
+        <a href="/" class="flex items-center gap-2 text-white text-2xl font-bold">
             <i class="fas fa-map-marked-alt"></i>
             LocalSpot
         </a>
-        <div class="navbar-menu">
-            <a href="/">Explore</a>
-            <a href="#">About</a>
-            <div class="auth-buttons">
-                <a href="/login" class="btn btn-login">Login</a>
-                <a href="/register" class="btn btn-register">Join</a>
+        <div class="flex items-center gap-6">
+            <a href="/" class="text-white font-medium hover:text-yellow-500 transition">Home</a>
+            <div class="flex gap-3">
+                <a href="{{ route('login') }}" class="px-4 py-2 border-2 border-white rounded-full text-white font-semibold hover:bg-white hover:text-[#2c3e50] transition">Login</a>
+                <a href="{{ route('register') }}" class="px-4 py-2 rounded-full bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition">Register</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Alamat</h3>
-                <p> Jl. Pandanaran 2 No.12, Mugassari, Kec. Semarang Sel., Kota Semarang, Jawa Tengah 50249</p>
+    <footer class="bg-gradient-to-r from-stone-950 via-black to-neutral-400 text-white mt-12 p-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Alamat</h3>
+                <p>Jl. Pandanaran 2 No.12, Mugassari, Kec. Semarang Sel., Kota Semarang, Jawa Tengah 50249</p>
             </div>
-            <div class="footer-section">
-                <h3>KONTAK</h3>
-                <p>Email : localspot@gmail.com</p>
-                <p>No. Telp :081317690545</p>
+            <div>
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Kontak</h3>
+                <p>Email: localspot@gmail.com</p>
+                <p>No. Telp: 081317690545</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; © 2025 local spot by kelompok 1</p>
+        <div class="text-center mt-8 border-t border-white/20 pt-4">
+            <p>&copy; 2025 Local Spot by Kelompok 1</p>
         </div>
     </footer>
 

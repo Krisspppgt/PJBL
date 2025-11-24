@@ -3,349 +3,80 @@
 @section('title', 'Beranda - LocalSpot')
 
 @section('styles')
-<style>
-    /* Hero Section */
-    .hero {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') center/cover;
-        min-height: 450px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-        padding: 2rem;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    .search-bar {
-        display: flex;
-        gap: 1rem;
-        max-width: 600px;
-        width: 100%;
-    }
-
-    .search-bar input {
-        flex: 1;
-        padding: 1rem;
-        border: none;
-        border-radius: 50px;
-        font-size: 1rem;
-    }
-
-    .search-bar button {
-        padding: 1rem 2rem;
-        background-color: #f39c12;
-        color: white;
-        border: none;
-        border-radius: 50px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .search-bar button:hover {
-        background-color: #e67e22;
-    }
-
-    /* Categories */
-    .categories {
-        max-width: 1200px;
-        margin: -50px auto 3rem;
-        padding: 0 2rem;
-        position: relative;
-        z-index: 10;
-    }
-
-    .categories-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 1rem;
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .category-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1rem;
-        border-radius: 10px;
-        text-decoration: none;
-        color: #333;
-        transition: all 0.3s;
-        cursor: pointer;
-    }
-
-    .category-item:hover {
-        background-color: #fff5e6;
-        transform: translateY(-5px);
-    }
-
-    .category-item.active {
-        background-color: #f39c12;
-        color: white;
-    }
-
-    .category-icon {
-        width: 50px;
-        height: 50px;
-        background-color: #f39c12;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: white;
-    }
-
-    .category-item.active .category-icon {
-        background-color: white;
-        color: #f39c12;
-    }
-
-    .category-name {
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-
-    /* Content Section */
-    .content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem 3rem;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        color: #2c3e50;
-    }
-
-    /* Places Grid */
-    .places-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    .place-card {
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .place-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .place-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .place-content {
-        padding: 1.5rem;
-    }
-
-    .place-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
-        margin-bottom: 1rem;
-    }
-
-    .place-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 0.3rem;
-    }
-
-    .place-rating {
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        color: #f39c12;
-        font-weight: 600;
-    }
-
-    .place-category {
-        display: inline-block;
-        padding: 0.3rem 1rem;
-        background-color: #fff5e6;
-        color: #f39c12;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-
-    .place-location {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #7f8c8d;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .place-description {
-        color: #7f8c8d;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 1rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .place-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .tag {
-        padding: 0.3rem 0.8rem;
-        background-color: #f8f9fa;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        color: #7f8c8d;
-    }
-
-    .place-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 1rem;
-        border-top: 1px solid #ecf0f1;
-    }
-
-    .place-distance {
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        color: #7f8c8d;
-        font-size: 0.9rem;
-    }
-
-    .btn-detail {
-        padding: 0.6rem 1.5rem;
-        background-color: #8b4513;
-        color: white;
-        border-radius: 20px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: background-color 0.3s;
-    }
-
-    .btn-detail:hover {
-        background-color: #6d3410;
-    }
-
-    /* No Results */
-    .no-results {
-        text-align: center;
-        padding: 3rem;
-        color: #7f8c8d;
-    }
-
-    .no-results i {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-        color: #bdc3c7;
-    }
-</style>
+    {{-- Styles converted to Tailwind utilities in markup; keep this section if you want to add small inline CSS later --}}
 @endsection
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero">
-    <h1>Menampilkan berbagai spot</h1>
-    <p>Temukan spot favorit mu di sekitarmu</p>
-    <div class="search-bar">
-        <input type="text" placeholder=" Cari spot ternyamanmu..">
-        <button><i class="fas fa-search"></i> Cari</button>
+<section class="min-h-[450px] flex flex-col justify-center items-center text-white text-center p-8"
+         style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') center/cover;">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
+    <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
+
+    <div class="flex gap-4 max-w-2xl w-full">
+        <input type="text" placeholder="Cari spot ternyamanmu.." class="flex-1 px-4 py-3 rounded-full text-black outline-none" />
+        <button class="px-6 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600">
+            <i class="fas fa-search mr-2"></i> Cari
+        </button>
     </div>
 </section>
 
 <!-- Categories -->
-<section class="categories">
-    <div class="categories-grid">
-        <a href="?category=all" class="category-item {{ $category == 'all' ? 'active' : '' }}">
-            <div class="category-icon">
+<section class="-mt-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 bg-blue-900 p-6 rounded-xl shadow-lg">
+        <a href="?category=all" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'all' ? 'bg-white' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'all' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-th"></i>
             </div>
-            <span class="category-name">All</span>
+            <span class="font-semibold text-sm">All</span>
         </a>
-        <a href="?category=cafe" class="category-item {{ $category == 'cafe' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=cafe" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'cafe' ? 'bg-white' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'cafe' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-coffee"></i>
             </div>
-            <span class="category-name">Cafe</span>
+            <span class="font-semibold text-sm">Cafe</span>
         </a>
-        <a href="?category=restaurant" class="category-item {{ $category == 'restaurant' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=restaurant" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'restaurant' ? 'bg-white ' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'restaurant' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-utensils"></i>
             </div>
-            <span class="category-name">Restaurant</span>
+            <span class="font-semibold text-sm">Restaurant</span>
         </a>
-        <a href="?category=street-food" class="category-item {{ $category == 'street-food' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=street-food" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'street-food' ? 'bg-white ' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'street-food' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-hamburger"></i>
             </div>
-            <span class="category-name">Street Food</span>
+            <span class="font-semibold text-sm">Street Food</span>
         </a>
-        <a href="?category=bakery" class="category-item {{ $category == 'bakery' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=bakery" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'bakery' ? 'bg-white' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'bakery' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-bread-slice"></i>
             </div>
-            <span class="category-name">Bakery</span>
+            <span class="font-semibold text-sm">Bakery</span>
         </a>
-        <a href="?category=drink-area" class="category-item {{ $category == 'drink-area' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=drink-area" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'drink-area' ? 'bg-white' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'drink-area' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-glass-cheers"></i>
             </div>
-            <span class="category-name">Drink Area</span>
+            <span class="font-semibold text-sm">Drink Area</span>
         </a>
-        <a href="?category=catering" class="category-item {{ $category == 'catering' ? 'active' : '' }}">
-            <div class="category-icon">
+        <a href="?category=catering" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'catering' ? 'bg-white' : 'text-white' }}">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'catering' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                 <i class="fas fa-concierge-bell"></i>
             </div>
-            <span class="category-name">Catering</span>
+            <span class="font-semibold text-sm">Catering</span>
         </a>
+        </div>
     </div>
 </section>
 
 <!-- Content Section -->
-<section class="content">
-    <h2 class="section-title">
+<section class="max-w-7xl mx-auto px-4 py-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
         @if($category == 'all')
             All Best For You
         @else
@@ -356,7 +87,7 @@
     @if($places->count() > 0)
         <div class="places-grid">
             @foreach($places as $place)
-            <div class="place-card">
+            <div class="place-card ">
                 <img src="{{ $place->image ?? 'https://via.placeholder.com/400x200' }}" alt="{{ $place->name }}" class="place-image">
                 <div class="place-content">
                     <span class="place-category">{{ ucfirst(str_replace('-', ' ', $place->category)) }}</span>
