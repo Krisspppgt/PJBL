@@ -41,4 +41,9 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
 
+    'foursquare' => [
+    'key' => env('FOURSQUARE_API_KEY'),
+],
+
+
 ];

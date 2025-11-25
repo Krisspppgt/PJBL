@@ -23,6 +23,7 @@ class Place extends Model
         'phone',
         'opening_hours',
         'price_range',
+        'foursquare_id',
         'user_id',
     ];
 
@@ -30,6 +31,7 @@ class Place extends Model
         'rating' => 'float',
         'latitude' => 'float',
         'longitude' => 'float',
+        'opening_hours' => 'array',
     ];
 
     public function user()
