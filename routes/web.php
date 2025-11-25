@@ -7,30 +7,18 @@ use App\Http\Controllers\GuestController;
 Route::get('/', [GuestController::class, 'index'])->name('guest.home');
 Route::get('/place/{id}', [GuestController::class, 'show'])->name('guest.place.show');
 
-// Auth Routes (jika belum ada)
-
-
+// Information & Homepage Pages
 Route::get('/information', function () {
     return view('page.information');
 })->name('information');
+
+Route::get('/homepage', function () {
+    return view('page.homepage');
+})->name('homepage');
 
 Route::get('/profile', function () {
     return view('profile.edit');
 })->name('profile.edit');
 
-Route::post('/logout', function () {
-    // Logic untuk logout
-})->name('logout');
 
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-
-
-
+require __DIR__.'/auth.php';

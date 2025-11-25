@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             SpotSeeder::class,
+            PlaceSeeder::class,
         ]);
     }
 }

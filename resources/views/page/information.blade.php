@@ -21,9 +21,18 @@
                 <div class="rounded w-fit h-auto border border-black flex">Share</div>
             </div>
             <h2 class="font-bold ml-5">Description</h2>
-            <p class="justify-center">
-
-
+            <p class="justify-center ml-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis veritatis autem aspernatur consequuntur nemo recusandae? 
+                Non, pariatur, reprehenderit perspiciatis voluptates harum ullam quibusdam facere molestiae velit, voluptate ea temporibus ad!
+            </p>
+            <div class="flex flex-col gap-2 ml-10 w-1/4">
+                <div class="border rounded-full p-5 font-bold">Hours
+                    <p>09:00 - 22:00</p>
+                </div>
+                <div class="border rounded-full p-5">Instagram
+                    <div>@namaig</div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

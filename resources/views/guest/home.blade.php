@@ -12,7 +12,8 @@
 @section('content')
 <!-- Hero Section -->
 <section class="min-h-[450px] flex flex-col justify-center items-center text-white text-center p-8"
-         style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') center/cover;">
+         style="background: linear-gradient(rgba(0,0,0,0.4), rgba(255, 255, 255, 0.4)), center/cover;"
+         src="{{ asset('images/logo.jpeg') }}">
     <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
     <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
 
