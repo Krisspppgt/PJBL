@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.places.layout')
 @section('title','Daftar Tempat')
 @section('content')
 <div class="flex justify-between items-center mb-4">

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.places.layout')
 @section('title','Tambah Tempat')
 @section('content')
 <div class="max-w-3xl bg-white p-6 rounded shadow">

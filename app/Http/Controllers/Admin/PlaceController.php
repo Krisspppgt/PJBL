@@ -15,7 +15,8 @@ class PlaceController extends Controller
     public function __construct(FoursquareService $fs)
     {
         $this->fs = $fs;
-        $this->middleware('auth'); // pastikan user login
+        //$this->middleware('auth'); // pastikan user login
+        
     }
 
     // List
@@ -55,12 +56,12 @@ class PlaceController extends Controller
         // map fields to our form/data
         $data = [
             'name' => $detail['name'] ?? null,
-            'address' => $detail['location']['formatted_address'] ?? null,
-            'latitude' => $detail['geocodes']['main']['latitude'] ?? null,
-            'longitude' => $detail['geocodes']['main']['longitude'] ?? null,
-            'rating' => $detail['rating'] ?? 0,
-            'reviews_count' => $detail['stats']['total_ratings'] ?? 0,
-            'phone' => $detail['tel'] ?? null,
+            'address' => data_get($detail, 'location.formatted_address'),
+            'latitude' => data_get($detail, 'geocodes.main.latitude'),
+            'longitude' => data_get($detail, 'geocodes.main.longitude'),
+            'rating' => data_get($detail, 'rating', 0),
+            'reviews_count' => data_get($detail, 'stats.total_ratings', 0),
+            'phone' => data_get($detail, 'tel'),
             'opening_hours' => json_encode($this->fs->parseOpeningHours($detail)),
             'image_url' => $photoUrl,
             'foursquare_id' => $fsq_id

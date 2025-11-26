@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.places.layout')
 @section('title','Cari via Foursquare')
 @section('content')
 <form method="GET" class="mb-6">
