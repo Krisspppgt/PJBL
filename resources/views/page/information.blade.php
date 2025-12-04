@@ -1,11 +1,12 @@
 <html>
+    @extends('layouts.app')
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
-        @include('layouts.navbar')
     </head>
     <body> 
+        @section('content')
         <div class="bg-white">
             <img src="{{ asset('images/logo.jpeg') }}" alt="Information Image" class="w-1/2 h-auto object-cover rounded-lg justify-center items-center object-center mx-auto mt-10">
             <h2 class="text-3xl font-bold text-black mt-4 ml-7 mb-4">Nama Tempat</h2>
@@ -25,7 +26,7 @@
                 </svg>
             </div>
             <h2 class="font-bold text-2xl ml-7 mt-5">Description</h2>
-            <p class="justify-center ml-5">
+            <p class="justify-center ml-7">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis veritatis autem aspernatur consequuntur nemo recusandae? 
                 Non, pariatur, reprehenderit perspiciatis voluptates harum ullam quibusdam facere molestiae velit, voluptate ea temporibus ad!
             </p>
@@ -69,4 +70,5 @@
             <a href="/comment" class="block w-fit mx-auto mb-10 px-6 py-3 bg-blue-800 text-white rounded-full font-semibold hover:bg-blue-900">Add Review</a>
         </div>
     </body>
+    @endsection
 </html>

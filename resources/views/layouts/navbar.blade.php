@@ -3,6 +3,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
+        @yield('styles')
     </head>
 <body>
     <nav x-data="{ open: false }" class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 p-3 shadow-md flex flex-row justify-between items-center">
@@ -12,7 +13,7 @@
             </div>
         </div>
         <div class="text-white text-lg font-medium">
-            <a href="">Home</a>
+            <a href="/homepage">Home</a>
         </div>
 
         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -47,6 +48,29 @@
             </x-dropdown>
         </div>
     </nav>
+
+    <main>
+        @yield('content')
+    </main>
+    
+    <footer class="bg-gradient-to-r from-stone-950 via-black to-neutral-400 text-white mt-12 p-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Alamat</h3>
+                <p>Jl. Pandanaran 2 No.12, Mugassari, Kec. Semarang Sel., Kota Semarang, Jawa Tengah 50249</p>
+            </div>
+            <div>
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Kontak</h3>
+                <p>Email: localspot@gmail.com</p>
+                <p>No. Telp: 081317690545</p>
+            </div>
+        </div>
+        <div class="text-center mt-8 border-t border-white/20 pt-4">
+            <p>&copy; 2025 Local Spot by Kelompok 1</p>
+        </div>
+    </footer>
+
+    @yield('scripts')
 
     <!-- WAJIB ADA: Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>

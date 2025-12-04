@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\Admin\PlaceController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+
 
 // Guest Routes
 Route::get('/', [GuestController::class, 'index'])->name('guest.home');
@@ -18,9 +20,7 @@ Route::get('/comment', function () {
     return view('page.comment');
 })->name('comment');
 
-Route::get('/homepage', function () {
-    return view('page.homepage');
-})->name('homepage');
+
 
 Route::get('/profile', function () {
     $user = Auth::user(); 
@@ -40,6 +40,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('places/search', [PlaceController::class, 'search'])->name('places.search');
     Route::get('places/import/{fsq_id}', [PlaceController::class, 'import'])->name('places.import');
     Route::resource('places', PlaceController::class);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/homepage', [HomeController::class, 'index'])->name('homepage');
 });
 
 
