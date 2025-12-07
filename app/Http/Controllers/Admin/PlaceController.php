@@ -15,7 +15,7 @@ class PlaceController extends Controller
     public function __construct(FoursquareService $fs)
     {
         $this->fs = $fs;
-        //$this->middleware('auth'); // pastikan user login
+        $this->middleware('auth'); // pastikan user login
         
     }
 
@@ -139,7 +139,7 @@ class PlaceController extends Controller
     // edit form
     public function edit(Place $place)
     {
-        $this->authorize('update', $place);
+    
         return view('admin.places.edit', compact('place'));
     }
 
@@ -173,7 +173,7 @@ class PlaceController extends Controller
     // destroy
     public function destroy(Place $place)
     {
-        $this->authorize('delete', $place);
+        
         if ($place->image && file_exists(public_path("images/{$place->image}"))) {
             @unlink(public_path("images/{$place->image}"));
         }

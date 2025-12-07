@@ -32,7 +32,7 @@ Route::get('/profile', function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return redirect()->route('admin.places.index');
     })->name('dashboard');
