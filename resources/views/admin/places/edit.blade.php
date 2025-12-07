@@ -33,10 +33,17 @@
 
         <div>
             <label for="category" class="block font-medium">Category</label>
+<<<<<<< HEAD
             <select name="category" id="category" class="w-full border rounded p-2" required>
                 @foreach(['cafe','restaurant','street-food','bakery','drink-area','catering'] as $cat)
                     <option value="{{ $cat }}" {{ (old('category') == $cat || $place->category == $cat) ? 'selected' : '' }}>
                         {{ ucfirst($cat) }}
+=======
+            <select name="category" id="category" class="w-full border rounded p-2">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $place->category_id == $category->id ? 'selected' : '' }}>
+                        {{ $category->nama }}
+>>>>>>> 6990e32e1ee88045714c2eaeaeefa88b86a616df
                     </option>
                 @endforeach
             </select>
