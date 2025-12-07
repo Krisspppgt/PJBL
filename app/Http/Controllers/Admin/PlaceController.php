@@ -7,6 +7,7 @@ use App\Models\Place;
 use App\Services\FoursquareService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\Category;
 
 class PlaceController extends Controller
 {
@@ -132,16 +133,18 @@ class PlaceController extends Controller
             'price_range' => $request->price_range ?? null,
             'foursquare_id' => $v['foursquare_id'] ?? null
         ]);
-
+        
         return redirect()->route('admin.places.index')->with('success', 'Tempat berhasil disimpan.');
     }
 
     // edit form
-    public function edit(Place $place)
-    {
-    
-        return view('admin.places.edit', compact('place'));
-    }
+public function edit(Place $place)
+{
+    return view('admin.places.edit', [
+        'place' => $place,
+        'categories' => Category::all(),
+    ]);
+}
 
     // update
     public function update(Request $request, Place $place)

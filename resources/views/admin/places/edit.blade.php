@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.places.layout')
 
 @section('title', 'Edit Place - Admin')
 
@@ -36,7 +36,7 @@
             <select name="category_id" id="category_id" class="w-full border rounded p-2">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ $place->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
+                        {{ $category->nama }}
                     </option>
                 @endforeach
             </select>
