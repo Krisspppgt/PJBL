@@ -48,4 +48,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Di dalam class User, tambahkan:
+public function favorites()
+{
+    return $this->hasMany(\App\Models\Favorite::class, 'user_id');
+}
+
+public function favoritePlaces()
+{
+    return $this->belongsToMany(
+        \App\Models\Place::class,
+        'favorites',
+        'user_id',
+        'place_id'
+    )->withTimestamps();
+}
+
 }

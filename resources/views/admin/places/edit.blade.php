@@ -22,7 +22,7 @@
 
         <div>
             <label for="name" class="block font-medium">Name</label>
-            <input type="text" name="name" id="name" value="{{ old('name', $place->name) }}" 
+            <input type="text" name="name" id="name" value="{{ old('name', $place->name) }}"
                    class="w-full border rounded p-2" required>
         </div>
 
@@ -32,11 +32,11 @@
         </div>
 
         <div>
-            <label for="category_id" class="block font-medium">Category</label>
-            <select name="category_id" id="category_id" class="w-full border rounded p-2">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $place->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->nama }}
+            <label for="category" class="block font-medium">Category</label>
+            <select name="category" id="category" class="w-full border rounded p-2" required>
+                @foreach(['cafe','restaurant','street-food','bakery','drink-area','catering'] as $cat)
+                    <option value="{{ $cat }}" {{ (old('category') == $cat || $place->category == $cat) ? 'selected' : '' }}>
+                        {{ ucfirst($cat) }}
                     </option>
                 @endforeach
             </select>
@@ -44,7 +44,7 @@
 
         <div>
             <label for="foursquare_id" class="block font-medium">Foursquare ID</label>
-            <input type="text" name="foursquare_id" id="foursquare_id" value="{{ old('foursquare_id', $place->foursquare_id) }}" 
+            <input type="text" name="foursquare_id" id="foursquare_id" value="{{ old('foursquare_id', $place->foursquare_id) }}"
                    class="w-full border rounded p-2">
         </div>
 
