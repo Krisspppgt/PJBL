@@ -27,7 +27,7 @@
 
     <div>
       <label class="block mb-1">Kategori</label>
-      <select name="category_id" class="w-full border p-2 rounded" required>
+      <select name="category" class="w-full border p-2 rounded" required>
         @foreach(['cafe','restaurant','street-food','bakery','drink-area','catering'] as $cat)
           <option value="{{ $cat }}" {{ (old('category') == $cat) || (isset($data['category']) && $data['category']==$cat) ? 'selected' : '' }}>{{ ucfirst($cat) }}</option>
         @endforeach

@@ -32,8 +32,8 @@
         </div>
 
         <div>
-            <label for="category_id" class="block font-medium">Category</label>
-            <select name="category_id" id="category_id" class="w-full border rounded p-2">
+            <label for="category" class="block font-medium">Category</label>
+            <select name="category" id="category" class="w-full border rounded p-2">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ $place->category_id == $category->id ? 'selected' : '' }}>
                         {{ $category->nama }}
