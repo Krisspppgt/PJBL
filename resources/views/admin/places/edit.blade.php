@@ -33,20 +33,42 @@
 
         <div>
             <label for="category" class="block font-medium">Category</label>
-<<<<<<< HEAD
             <select name="category" id="category" class="w-full border rounded p-2" required>
                 @foreach(['cafe','restaurant','street-food','bakery','drink-area','catering'] as $cat)
                     <option value="{{ $cat }}" {{ (old('category') == $cat || $place->category == $cat) ? 'selected' : '' }}>
                         {{ ucfirst($cat) }}
-=======
-            <select name="category" id="category" class="w-full border rounded p-2">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $place->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->nama }}
->>>>>>> 6990e32e1ee88045714c2eaeaeefa88b86a616df
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <div>
+            <label for="district" class="block font-medium">Kecamatan</label>
+            <select name="district" id="district" class="w-full border rounded p-2" required>
+                <option value="">Pilih Kecamatan</option>
+                <option value="Semarang Tengah" {{ old('district', $place->district) == 'Semarang Tengah' ? 'selected' : '' }}>Semarang Tengah</option>
+                <option value="Semarang Utara" {{ old('district', $place->district) == 'Semarang Utara' ? 'selected' : '' }}>Semarang Utara</option>
+                <option value="Semarang Timur" {{ old('district', $place->district) == 'Semarang Timur' ? 'selected' : '' }}>Semarang Timur</option>
+                <option value="Semarang Selatan" {{ old('district', $place->district) == 'Semarang Selatan' ? 'selected' : '' }}>Semarang Selatan</option>
+                <option value="Semarang Barat" {{ old('district', $place->district) == 'Semarang Barat' ? 'selected' : '' }}>Semarang Barat</option>
+                <option value="Gayamsari" {{ old('district', $place->district) == 'Gayamsari' ? 'selected' : '' }}>Gayamsari</option>
+                <option value="Genuk" {{ old('district', $place->district) == 'Genuk' ? 'selected' : '' }}>Genuk</option>
+                <option value="Pedurungan" {{ old('district', $place->district) == 'Pedurungan' ? 'selected' : '' }}>Pedurungan</option>
+                <option value="Tembalang" {{ old('district', $place->district) == 'Tembalang' ? 'selected' : '' }}>Tembalang</option>
+                <option value="Banyumanik" {{ old('district', $place->district) == 'Banyumanik' ? 'selected' : '' }}>Banyumanik</option>
+                <option value="Gunungpati" {{ old('district', $place->district) == 'Gunungpati' ? 'selected' : '' }}>Gunungpati</option>
+                <option value="Mijen" {{ old('district', $place->district) == 'Mijen' ? 'selected' : '' }}>Mijen</option>
+                <option value="Ngaliyan" {{ old('district', $place->district) == 'Ngaliyan' ? 'selected' : '' }}>Ngaliyan</option>
+                <option value="Tugu" {{ old('district', $place->district) == 'Tugu' ? 'selected' : '' }}>Tugu</option>
+                <option value="Candisari" {{ old('district', $place->district) == 'Candisari' ? 'selected' : '' }}>Candisari</option>
+                <option value="Gajahmungkur" {{ old('district', $place->district) == 'Gajahmungkur' ? 'selected' : '' }}>Gajahmungkur</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="instagram" class="block font-medium">Instagram</label>
+            <input type="text" name="instagram" id="instagram" value="{{ old('instagram', $place->instagram) }}"
+                   class="w-full border rounded p-2" placeholder="@namatempat">
         </div>
 
         <div>

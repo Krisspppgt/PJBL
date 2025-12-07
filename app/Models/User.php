@@ -48,6 +48,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+       public function reviews()
+    {
+        return $this->hasMany(Review::class)->latest();
+    }
+
+    public function hasReviewed(Place $place)
+{
+    return $this->reviews()->where('place_id', $place->id)->exists();
+}
     // Di dalam class User, tambahkan:
 public function favorites()
 {
@@ -63,5 +73,5 @@ public function favoritePlaces()
         'place_id'
     )->withTimestamps();
 }
-
+ 
 }

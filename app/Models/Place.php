@@ -14,28 +14,87 @@ class Place extends Model
         'category',
         'description',
         'address',
-        'latitude',
-        'longitude',
-        'image',
+        'district',
         'rating',
         'reviews_count',
-        'tags',
         'phone',
+        'instagram',
         'opening_hours',
-        'price_range',
+        'image',
         'foursquare_id',
-        'user_id',
+        'image_url',
     ];
 
     protected $casts = [
-        'rating' => 'float',
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'opening_hours' => 'array',
+        'rating' => 'decimal:1',
+        'reviews_count' => 'integer',
     ];
 
-    public function user()
+    /**
+     * Get all reviews for this place
+     */
+    public function reviews()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Review::class)->latest();
+    }
+
+    /**
+     * Get users who favorited this place
+     */
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'place_id', 'user_id')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Calculate and update average rating
+     */
+    public function updateAverageRating()
+    {
+        $avgRating = $this->reviews()->avg('rating');
+        $reviewCount = $this->reviews()->count();
+        
+        $this->update([
+            'rating' => $avgRating ? round($avgRating, 1) : 0,
+            'reviews_count' => $reviewCount,
+        ]);
+    }
+
+    /**
+     * Scope untuk filter by category
+     */
+    public function scopeByCategory($query, $category)
+    {
+        if ($category && $category !== 'all') {
+            return $query->where('category', $category);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope untuk filter by district
+     */
+    public function scopeByDistrict($query, $district)
+    {
+        if ($district) {
+            return $query->where('district', $district);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope untuk search
+     */
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%");
+            });
+        }
+        return $query;
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PlaceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -37,6 +38,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 Route::middleware(['auth'])->group(function () {
     // Homepage
     Route::get('/homepage', [HomeController::class, 'index'])->name('homepage');
+
+    // Place Detail (untuk user yang login)
+    Route::get('/place/{id}/detail', [HomeController::class, 'show'])->name('place.detail');
+
+    // Review Routes (hanya untuk user yang login)
+    Route::post('/place/{place}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::patch('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 
     // Favorites Routes
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');

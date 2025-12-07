@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Place;
 use Illuminate\Http\Request;
 
-class GuestController extends Controller
+class PlaceController extends Controller
 {
     /**
-     * Display guest homepage with places list
+     * Display homepage with places list
      */
-    public function index(Request $request)
+    public function homepage(Request $request)
     {
         $category = $request->get('category', 'all');
         $search = $request->get('search');
@@ -43,11 +43,11 @@ class GuestController extends Controller
                        ->paginate(12)
                        ->withQueryString();
 
-        return view('guest.home', compact('places', 'category'));
+        return view('page.homepage', compact('places', 'category'));
     }
 
     /**
-     * Display the specified place (guest view - read only, no review form)
+     * Display the specified place with reviews
      */
     public function show($id)
     {
@@ -60,7 +60,6 @@ class GuestController extends Controller
                         ->latest()
                         ->paginate(10);
 
-        // Guest akan melihat view yang sama tapi tanpa form review
         return view('page.place_detail', compact('place', 'reviews'));
     }
 }

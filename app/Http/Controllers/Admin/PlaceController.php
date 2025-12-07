@@ -17,7 +17,6 @@ class PlaceController extends Controller
     {
         $this->fs = $fs;
         $this->middleware('auth'); // pastikan user login
-
     }
 
     // List
@@ -31,6 +30,9 @@ class PlaceController extends Controller
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
+        if ($request->filled('district')) {
+            $query->where('district', $request->district);
+        }
 
         $places = $query->latest()->paginate(12)->withQueryString();
         return view('admin.places.index', compact('places'));
@@ -42,7 +44,7 @@ class PlaceController extends Controller
         $results = null;
         $query = $request->query('q');
         if ($query) {
-            $results = $this->fs->search($query, $request->query('near', 'Jakarta'), 12);
+            $results = $this->fs->search($query, $request->query('near', 'Semarang'), 12);
         }
         return view('admin.places.search', compact('results','query'));
     }
@@ -58,14 +60,15 @@ class PlaceController extends Controller
         $data = [
             'name' => $detail['name'] ?? null,
             'address' => data_get($detail, 'location.formatted_address'),
-            'latitude' => data_get($detail, 'geocodes.main.latitude'),
-            'longitude' => data_get($detail, 'geocodes.main.longitude'),
             'rating' => data_get($detail, 'rating', 0),
             'reviews_count' => data_get($detail, 'stats.total_ratings', 0),
             'phone' => data_get($detail, 'tel'),
             'opening_hours' => json_encode($this->fs->parseOpeningHours($detail)),
             'image_url' => $photoUrl,
-            'foursquare_id' => $fsq_id
+            'foursquare_id' => $fsq_id,
+            // Default values untuk field baru
+            'instagram' => null,
+            'district' => null,
         ];
 
         return view('admin.places.create', compact('data'));
@@ -85,13 +88,13 @@ class PlaceController extends Controller
             'category' => 'required|in:cafe,restaurant,street-food,bakery,drink-area,catering',
             'description' => 'nullable|string',
             'address' => 'nullable|string',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
+            'district' => 'required|string|max:100',
+            'instagram' => 'nullable|string|max:100',
             'image' => 'nullable|image',
             'image_url' => 'nullable|url',
-            'rating' => 'nullable|numeric',
-            'reviews_count' => 'nullable|integer',
-            'phone' => 'nullable|string',
+            'rating' => 'nullable|numeric|min:0|max:5',
+            'reviews_count' => 'nullable|integer|min:0',
+            'phone' => 'nullable|string|max:20',
             'opening_hours' => 'nullable|string',
             'foursquare_id' => 'nullable|string'
         ]);
@@ -122,8 +125,8 @@ class PlaceController extends Controller
             'category' => $v['category'],
             'description' => $v['description'] ?? null,
             'address' => $v['address'] ?? null,
-            'latitude' => $v['latitude'] ?? null,
-            'longitude' => $v['longitude'] ?? null,
+            'district' => $v['district'],
+            'instagram' => $v['instagram'] ?? null,
             'image' => $imageName,
             'rating' => $v['rating'] ?? 0,
             'reviews_count' => $v['reviews_count'] ?? 0,
@@ -138,13 +141,13 @@ class PlaceController extends Controller
     }
 
     // edit form
-public function edit(Place $place)
-{
-    return view('admin.places.edit', [
-        'place' => $place,
-        'categories' => Category::all(),
-    ]);
-}
+    public function edit(Place $place)
+    {
+        return view('admin.places.edit', [
+            'place' => $place,
+            'categories' => Category::all(),
+        ]);
+    }
 
     // update
     public function update(Request $request, Place $place)
@@ -154,6 +157,11 @@ public function edit(Place $place)
             'category' => 'required|in:cafe,restaurant,street-food,bakery,drink-area,catering',
             'description' => 'nullable|string',
             'address' => 'nullable|string',
+            'district' => 'required|string|max:100',
+            'instagram' => 'nullable|string|max:100',
+            'phone' => 'nullable|string|max:20',
+            'opening_hours' => 'nullable|string',
+            'foursquare_id' => 'nullable|string',
             'image' => 'nullable|image',
         ]);
 
@@ -176,7 +184,6 @@ public function edit(Place $place)
     // destroy
     public function destroy(Place $place)
     {
-
         if ($place->image && file_exists(public_path("images/{$place->image}"))) {
             @unlink(public_path("images/{$place->image}"));
         }

@@ -44,30 +44,47 @@
       <textarea name="address" class="w-full border p-2 rounded h-20">{{ $data['address'] ?? old('address') }}</textarea>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block mb-1">Latitude</label>
-        <input name="latitude" value="{{ $data['latitude'] ?? '' }}" class="w-full border p-2 rounded">
-      </div>
-      <div>
-        <label class="block mb-1">Longitude</label>
-        <input name="longitude" value="{{ $data['longitude'] ?? '' }}" class="w-full border p-2 rounded">
-      </div>
+    <div>
+      <label class="block mb-1">Kecamatan</label>
+      <select name="district" class="w-full border p-2 rounded" required>
+        <option value="">Pilih Kecamatan</option>
+        <option value="Semarang Tengah" {{ (old('district', $data['district'] ?? '') == 'Semarang Tengah') ? 'selected' : '' }}>Semarang Tengah</option>
+        <option value="Semarang Utara" {{ (old('district', $data['district'] ?? '') == 'Semarang Utara') ? 'selected' : '' }}>Semarang Utara</option>
+        <option value="Semarang Timur" {{ (old('district', $data['district'] ?? '') == 'Semarang Timur') ? 'selected' : '' }}>Semarang Timur</option>
+        <option value="Semarang Selatan" {{ (old('district', $data['district'] ?? '') == 'Semarang Selatan') ? 'selected' : '' }}>Semarang Selatan</option>
+        <option value="Semarang Barat" {{ (old('district', $data['district'] ?? '') == 'Semarang Barat') ? 'selected' : '' }}>Semarang Barat</option>
+        <option value="Gayamsari" {{ (old('district', $data['district'] ?? '') == 'Gayamsari') ? 'selected' : '' }}>Gayamsari</option>
+        <option value="Genuk" {{ (old('district', $data['district'] ?? '') == 'Genuk') ? 'selected' : '' }}>Genuk</option>
+        <option value="Pedurungan" {{ (old('district', $data['district'] ?? '') == 'Pedurungan') ? 'selected' : '' }}>Pedurungan</option>
+        <option value="Tembalang" {{ (old('district', $data['district'] ?? '') == 'Tembalang') ? 'selected' : '' }}>Tembalang</option>
+        <option value="Banyumanik" {{ (old('district', $data['district'] ?? '') == 'Banyumanik') ? 'selected' : '' }}>Banyumanik</option>
+        <option value="Gunungpati" {{ (old('district', $data['district'] ?? '') == 'Gunungpati') ? 'selected' : '' }}>Gunungpati</option>
+        <option value="Mijen" {{ (old('district', $data['district'] ?? '') == 'Mijen') ? 'selected' : '' }}>Mijen</option>
+        <option value="Ngaliyan" {{ (old('district', $data['district'] ?? '') == 'Ngaliyan') ? 'selected' : '' }}>Ngaliyan</option>
+        <option value="Tugu" {{ (old('district', $data['district'] ?? '') == 'Tugu') ? 'selected' : '' }}>Tugu</option>
+        <option value="Candisari" {{ (old('district', $data['district'] ?? '') == 'Candisari') ? 'selected' : '' }}>Candisari</option>
+        <option value="Gajahmungkur" {{ (old('district', $data['district'] ?? '') == 'Gajahmungkur') ? 'selected' : '' }}>Gajahmungkur</option>
+      </select>
     </div>
 
     <div>
       <label class="block mb-1">Rating</label>
-      <input name="rating" value="{{ $data['rating'] ?? '' }}" class="w-full border p-2 rounded">
+      <input name="rating" value="{{ $data['rating'] ?? '' }}" class="w-full border p-2 rounded" type="number" step="0.1" min="0" max="5">
     </div>
 
     <div>
       <label class="block mb-1">Reviews Count</label>
-      <input name="reviews_count" value="{{ $data['reviews_count'] ?? '' }}" class="w-full border p-2 rounded">
+      <input name="reviews_count" value="{{ $data['reviews_count'] ?? '' }}" class="w-full border p-2 rounded" type="number" min="0">
     </div>
 
     <div>
       <label class="block mb-1">Telepon</label>
       <input name="phone" value="{{ $data['phone'] ?? '' }}" class="w-full border p-2 rounded">
+    </div>
+
+    <div>
+      <label class="block mb-1">Instagram</label>
+      <input name="instagram" value="{{ old('instagram') }}" class="w-full border p-2 rounded" placeholder="@namatempat">
     </div>
 
     <div>
