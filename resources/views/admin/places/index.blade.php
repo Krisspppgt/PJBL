@@ -1,7 +1,21 @@
 @extends('admin.places.layout')
 @section('title','Daftar Tempat')
 @section('content')
-<div class="flex justify-between items-center mb-4">
+<div class="mb-4">
+  @if(session('success'))
+    <div class="mb-3 px-4 py-2 bg-green-100 text-green-800 rounded">{{ session('success') }}</div>
+  @endif
+  @if($errors->any())
+    <div class="mb-3 px-4 py-2 bg-red-100 text-red-800 rounded">
+      <ul class="list-disc pl-5">
+        @foreach($errors->all() as $err)
+          <li>{{ $err }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
+
+  <div class="flex justify-between items-center">
   <div class="flex gap-2">
     <form class="flex gap-2" method="GET">
       <input name="search" value="{{ request('search') }}" placeholder="Cari..." class="px-3 py-2 border rounded" />

@@ -17,7 +17,7 @@ class PlaceController extends Controller
     {
         $this->fs = $fs;
         $this->middleware('auth'); // pastikan user login
-        
+
     }
 
     // List
@@ -133,7 +133,7 @@ class PlaceController extends Controller
             'price_range' => $request->price_range ?? null,
             'foursquare_id' => $v['foursquare_id'] ?? null
         ]);
-        
+
         return redirect()->route('admin.places.index')->with('success', 'Tempat berhasil disimpan.');
     }
 
@@ -176,7 +176,7 @@ public function edit(Place $place)
     // destroy
     public function destroy(Place $place)
     {
-        
+
         if ($place->image && file_exists(public_path("images/{$place->image}"))) {
             @unlink(public_path("images/{$place->image}"));
         }
