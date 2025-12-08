@@ -135,10 +135,8 @@
 <section class="max-w-7xl mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl md:text-3xl font-bold text-slate-800">
-            <i class="fas fa-heart text-red-500 mr-2"></i>Your Favorite Spot
+            <i ></i>Your Favorite Spot
         </h2>
-        <a href="{{ route('homepage') }}" class="text-blue-600 hover:text-blue-800 font-semibold">
-            <i class="fas fa-arrow-left mr-1"></i> Back to Home
         </a>
     </div>
 
