@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [GuestController::class, 'index'])->name('guest.home');
 Route::get('/place/{id}', [GuestController::class, 'show'])->name('guest.place.show');
 
+Route::get('/about', function () {
+    return view('page.about');
+})->name('about');
+
+
 // Information & Comment Pages
 Route::get('/information', function () {
     return view('page.information');
