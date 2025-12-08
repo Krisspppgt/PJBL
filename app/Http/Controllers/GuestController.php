@@ -53,7 +53,7 @@ class GuestController extends Controller
     {
         // Get place with reviews (paginated)
         $place = Place::findOrFail($id);
-        
+
         // Get reviews with user info, paginated (10 per page)
         $reviews = $place->reviews()
                         ->with('user')
