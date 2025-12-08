@@ -236,11 +236,8 @@
 <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl transform transition-all">
         <div class="text-center">
-            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-heart text-red-500 text-2xl"></i>
-            </div>
             <h3 class="text-2xl font-bold text-slate-800 mb-2">Login Diperlukan</h3>
-            <p class="text-slate-600 mb-6">Silakan login terlebih dahulu untuk menyimpan tempat favorit Anda</p>
+            <p class="text-slate-600 mb-6">Silakan login terlebih dahulu </p>
             <div class="flex gap-3">
                 <button onclick="closeLoginModal()"
                         class="flex-1 px-4 py-3 border-2 border-slate-300 text-slate-700 rounded-full font-semibold hover:bg-slate-50 transition-colors">
