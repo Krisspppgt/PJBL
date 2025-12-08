@@ -17,12 +17,72 @@
     <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
     <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
 
-    <div class="flex gap-4 max-w-2xl w-full">
-        <input type="text" placeholder="Cari spot ternyamanmu.." class="flex-1 px-4 py-3 rounded-full text-black outline-none" />
-        <button class="px-6 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600">
-            <i class="fas fa-search mr-2"></i> Cari
-        </button>
+    <!-- Search Form -->
+    <form action="{{ route('guest.home') }}" method="GET" class="w-full max-w-4xl">
+        <div class="flex flex-col md:flex-row gap-4">
+            <!-- Search Input -->
+            <input type="text" 
+                   name="search" 
+                   id="searchInput" 
+                   value="{{ request('search') }}"
+                   placeholder="Cari nama tempat atau kecamatan..." 
+                   class="flex-1 px-4 py-3 rounded-full text-black outline-none" />
+            
+            <!-- District Filter -->
+            <select name="district" 
+                    class="px-4 py-3 rounded-full text-black outline-none bg-white">
+                <option value="">Semua Kecamatan</option>
+                <option value="Semarang Tengah" {{ request('district') == 'Semarang Tengah' ? 'selected' : '' }}>Semarang Tengah</option>
+                <option value="Semarang Utara" {{ request('district') == 'Semarang Utara' ? 'selected' : '' }}>Semarang Utara</option>
+                <option value="Semarang Timur" {{ request('district') == 'Semarang Timur' ? 'selected' : '' }}>Semarang Timur</option>
+                <option value="Semarang Selatan" {{ request('district') == 'Semarang Selatan' ? 'selected' : '' }}>Semarang Selatan</option>
+                <option value="Semarang Barat" {{ request('district') == 'Semarang Barat' ? 'selected' : '' }}>Semarang Barat</option>
+                <option value="Gayamsari" {{ request('district') == 'Gayamsari' ? 'selected' : '' }}>Gayamsari</option>
+                <option value="Genuk" {{ request('district') == 'Genuk' ? 'selected' : '' }}>Genuk</option>
+                <option value="Pedurungan" {{ request('district') == 'Pedurungan' ? 'selected' : '' }}>Pedurungan</option>
+                <option value="Tembalang" {{ request('district') == 'Tembalang' ? 'selected' : '' }}>Tembalang</option>
+                <option value="Banyumanik" {{ request('district') == 'Banyumanik' ? 'selected' : '' }}>Banyumanik</option>
+                <option value="Gunungpati" {{ request('district') == 'Gunungpati' ? 'selected' : '' }}>Gunungpati</option>
+                <option value="Mijen" {{ request('district') == 'Mijen' ? 'selected' : '' }}>Mijen</option>
+                <option value="Ngaliyan" {{ request('district') == 'Ngaliyan' ? 'selected' : '' }}>Ngaliyan</option>
+                <option value="Tugu" {{ request('district') == 'Tugu' ? 'selected' : '' }}>Tugu</option>
+                <option value="Candisari" {{ request('district') == 'Candisari' ? 'selected' : '' }}>Candisari</option>
+                <option value="Gajahmungkur" {{ request('district') == 'Gajahmungkur' ? 'selected' : '' }}>Gajahmungkur</option>
+            </select>
+            
+            <!-- Preserve category filter -->
+            <input type="hidden" name="category" value="{{ request('category', 'all') }}">
+            
+            <!-- Search Button -->
+            <button type="submit" class="px-6 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 whitespace-nowrap">
+                <i class="fas fa-search mr-2"></i> Cari
+            </button>
+
+            <!-- Reset Button (if filters applied) -->
+            @if(request('search') || request('district'))
+            <a href="{{ route('guest.home') }}?category={{ request('category', 'all') }}" 
+               class="px-6 py-3 bg-gray-500 text-white rounded-full font-semibold hover:bg-gray-600 flex items-center whitespace-nowrap">
+                <i class="fas fa-times mr-2"></i> Reset
+            </a>
+            @endif
+        </div>
+    </form>
+
+    <!-- Active Filters Display -->
+    @if(request('search') || request('district'))
+    <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        @if(request('search'))
+        <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+            <i class="fas fa-search mr-1"></i> Pencarian: "{{ request('search') }}"
+        </span>
+        @endif
+        @if(request('district'))
+        <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm">
+            <i class="fas fa-map-marker-alt mr-1"></i> Kecamatan: {{ request('district') }}
+        </span>
+        @endif
     </div>
+    @endif
 </section>
 
 <!-- Categories -->

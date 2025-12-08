@@ -28,12 +28,13 @@ class GuestController extends Controller
             $query->where('district', $district);
         }
 
-        // Search functionality
+        // Search functionality - Now includes district search
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('address', 'like', "%{$search}%");
+                  ->orWhere('address', 'like', "%{$search}%")
+                  ->orWhere('district', 'like', "%{$search}%"); // Added district search
             });
         }
 
@@ -43,7 +44,14 @@ class GuestController extends Controller
                        ->paginate(12)
                        ->withQueryString();
 
-        return view('guest.home', compact('places', 'category'));
+        // Get list of districts for filter
+        $districts = Place::select('district')
+                         ->distinct()
+                         ->whereNotNull('district')
+                         ->orderBy('district')
+                         ->pluck('district');
+
+        return view('guest.home', compact('places', 'category', 'districts'));
     }
 
     /**
