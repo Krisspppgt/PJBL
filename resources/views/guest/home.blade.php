@@ -91,34 +91,32 @@
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <!-- Image Container with Favorite Button -->
                 <div class="relative h-48 overflow-hidden group">
-                    <img src="{{ $place->image ?? 'https://via.placeholder.com/400x200' }}"
+                    <img src="{{ $place->image ? asset('images/'.$place->image) : 'https://via.placeholder.com/400x200' }}"
                          alt="{{ $place->name }}"
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                         class="place-image">
 
                     <!-- Favorite Button (Guest) -->
                     @guest
                         <button onclick="showLoginPrompt()"
                                 class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 transition-all duration-200">
-                            <i class="far fa-heart text-red-500 text-lg"></i>
+                            <i class="fas fa-heart text-gray-500 text-lg"></i>
                         </button>
                     @else
                         <button onclick="toggleFavorite({{ $place->id }})"
                                 class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 transition-all duration-200 favorite-btn"
                                 data-place-id="{{ $place->id }}">
-                            <i class="far fa-heart text-red-500 text-lg favorite-icon"></i>
+                            <i class="fas fa-heart text-gray-500 text-lg favorite-icon"></i>
                         </button>
                     @endguest
-
-                    <!-- Category Badge -->
-                    <div class="absolute top-3 left-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                        {{ ucfirst(str_replace('-', ' ', $place->category)) }}
-                    </div>
                 </div>
 
                 <!-- Card Content -->
                 <div class="p-4">
                     <!-- Title and Rating -->
                     <div class="mb-2">
+                        <div class="w-fit bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            {{ ucfirst(str_replace('-', ' ', $place->category)) }}
+                        </div>
                         <h3 class="text-xl font-bold text-slate-800 mb-1">{{ $place->name }}</h3>
                         <div class="flex items-center gap-1 text-sm">
                             <i class="fas fa-star text-amber-500"></i>
@@ -136,30 +134,25 @@
                     <!-- Description -->
                     <p class="text-sm text-slate-600 mb-3 line-clamp-2">{{ $place->description }}</p>
 
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        @if($place->tags)
-                            @foreach(explode(',', $place->tags) as $tag)
-                                <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full">{{ trim($tag) }}</span>
-                            @endforeach
-                        @else
-                            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full">Wifi</span>
-                            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full">Parking</span>
-                            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full">AC</span>
-                        @endif
-                    </div>
-
                     <!-- Footer -->
                     <div class="flex items-center justify-between pt-3 border-t border-slate-200">
                         <div class="flex items-center gap-2 text-sm text-slate-600">
                             <i class="fas fa-route text-blue-500"></i>
                             <span class="font-semibold">{{ $place->distance ?? '2.5' }} km</span>
                         </div>
-                        <a href="/place/{{ $place->id }}"
-                           class="px-4 py-2 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors duration-200 flex items-center gap-2 text-sm">
-                            Detail
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
+                        @guest
+                            <button onclick="showLoginPrompt()"
+                                class="px-4 py-2 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors duration-200 flex items-center gap-2 text-sm">
+                                Detail
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        @else
+                            <a href="{{ route('places.show', $place->id) }}"
+                                class="px-4 py-2 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors duration-200 flex items-center gap-2 text-sm">
+                                Detail
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        @endguest
                     </div>
                 </div>
             </div>

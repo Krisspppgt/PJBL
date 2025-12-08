@@ -10,18 +10,18 @@
         gap: 0.25rem;
         justify-content: flex-end;
     }
-    
+
     .star-rating input {
         display: none;
     }
-    
+
     .star-rating label {
         cursor: pointer;
         font-size: 2rem;
         color: #d1d5db;
         transition: color 0.2s;
     }
-    
+
     .star-rating input:checked ~ label,
     .star-rating label:hover,
     .star-rating label:hover ~ label {
@@ -34,10 +34,10 @@
 <div class="bg-white min-h-screen">
     <!-- Hero Image -->
     <div class="max-w-7xl mx-auto px-4 py-8">
-        <img src="{{ $place->image ? asset('images/'.$place->image) : 'https://via.placeholder.com/1200x400' }}" 
-             alt="{{ $place->name }}" 
+        <img src="{{ $place->image ? asset('images/'.$place->image) : 'https://via.placeholder.com/1200x400' }}"
+             alt="{{ $place->name }}"
              class="w-full max-w-3xl mx-auto h-auto object-cover rounded-lg shadow-lg">
-        
+
         <!-- Title & Rating -->
         <h2 class="text-4xl font-bold text-black mt-6 mb-4">{{ $place->name }}</h2>
         <div class="flex flex-row items-center gap-2 mb-4">
@@ -56,7 +56,7 @@
 
         <!-- Action Buttons -->
         <div class="flex flex-row gap-2 mb-6">
-            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($place->address) }}" 
+            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($place->address) }}"
                target="_blank"
                class="flex-1 p-3 rounded-lg bg-blue-800 text-center text-white font-bold hover:bg-blue-900">
                 Direction
@@ -94,7 +94,7 @@
             @if($place->instagram)
             <div class="border-2 border-gray-200 rounded-xl p-5 hover:border-blue-500 transition">
                 <p class="font-bold text-lg mb-2">📸 Instagram</p>
-                <a href="https://instagram.com/{{ ltrim($place->instagram, '@') }}" 
+                <a href="https://instagram.com/{{ ltrim($place->instagram, '@') }}"
                    target="_blank"
                    class="text-blue-600 hover:underline">{{ $place->instagram }}</a>
             </div>
@@ -124,6 +124,7 @@
         <div class="mt-10">
             <h2 class="text-3xl font-bold text-black mb-6">Reviews ({{ $reviews->total() }})</h2>
 
+<<<<<<< HEAD
             <!-- Success/Error Messages -->
             @if(session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
@@ -176,6 +177,47 @@
                 <label for="star2">★</label>
                 <input type="radio" id="star1" name="rating" value="1" />
                 <label for="star1">★</label>
+=======
+            <!-- Add Review Form - Only for Logged In Users -->
+            @auth
+            <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">Write Your Review</h3>
+                <form action="{{ route('reviews.store', $place->id) }}" method="POST" id="reviewForm">
+                    @csrf
+
+                    <!-- Star Rating -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2">Rating</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" required />
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2">Comment</label>
+                        <textarea name="comment"
+                                  rows="4"
+                                  class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                  placeholder="Share your experience..."
+                                  required></textarea>
+                    </div>
+
+                    <button type="submit"
+                            class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
+                        Submit Review
+                    </button>
+                </form>
+>>>>>>> a7b926c9a08c61e954d6f5d77c2b6518a32b5ce2
             </div>
         </div>
 
@@ -207,14 +249,14 @@
                         <div class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center font-bold text-lg shrink-0">
                             {{ substr($review->user->name, 0, 1) }}
                         </div>
-                        
+
                         <div class="flex-1">
                             <!-- User Info & Rating -->
                             <div class="flex items-center justify-between mb-2">
                                 <h4 class="font-bold text-lg">{{ $review->user->name }}</h4>
                                 <span class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span>
                             </div>
-                            
+
                             <!-- Stars -->
                             <div class="flex items-center gap-2 mb-3">
                                 <span class="text-yellow-400 text-lg">
@@ -228,7 +270,7 @@
                                 </span>
                                 <span class="text-gray-600">({{ $review->rating }}/5)</span>
                             </div>
-                            
+
                             <!-- Comment -->
                             <p class="text-gray-700 leading-relaxed">{{ $review->comment }}</p>
 
@@ -237,7 +279,7 @@
                             <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" class="mt-3">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
+                                <button type="submit"
                                         onclick="return confirm('Are you sure you want to delete this review?')"
                                         class="text-sm text-red-600 hover:text-red-800 font-medium">
                                     🗑️ Delete Review

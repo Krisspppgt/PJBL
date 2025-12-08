@@ -324,17 +324,6 @@
                         <span>{{ Str::limit($place->address, 50) }}</span>
                     </div>
                     <p class="place-description">{{ Str::limit($place->description, 100) }}</p>
-                    <div class="place-tags">
-                        @if($place->tags)
-                            @foreach(explode(',', $place->tags) as $tag)
-                                <span class="tag">{{ trim($tag) }}</span>
-                            @endforeach
-                        @else
-                            <span class="tag">Wifi</span>
-                            <span class="tag">Parking</span>
-                            <span class="tag">AC</span>
-                        @endif
-                    </div>
                     <div class="place-footer">
                         <div class="place-distance">
                             <i class="fas fa-route"></i>

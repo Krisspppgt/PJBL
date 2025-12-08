@@ -7,15 +7,16 @@
     @yield('styles')
 </head>
 <body>
-    <nav x-data="{ open: false }" class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 p-3 shadow-md flex flex-row justify-between items-center">
-        <div class="container mx-auto flex justify-between items-center">
+    <nav x-data="{ open: false }" class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 p-3 shadow-md flex justify-between items-center mx-auto">
+        <div class="flex justify-between items-center">
             <div class="flex flex-row justify-center items-center text-white font-bold text-xl gap-2">
                 <img src="{{ asset('images/logo.jpeg') }}" alt="Lokal Spot Logo" class="w-10 h-10 rounded-full"> Lokal Spot
             </div>
         </div>
 
-        <div class="text-white text-lg font-medium">
+        <div class="text-white text-lg font-medium flex gap-6 ml-auto">
             <a href="/homepage" class="hover:text-yellow-400">Home</a>
+            <a href="/about" class="hover:text-yellow-400">About Us</a>
         </div>
 
         <div class="hidden sm:flex sm:items-center sm:ms-6">
