@@ -71,12 +71,7 @@
                    class="w-full border rounded p-2" placeholder="@namatempat">
         </div>
 
-        <div>
-            <label for="foursquare_id" class="block font-medium">Foursquare ID</label>
-            <input type="text" name="foursquare_id" id="foursquare_id" value="{{ old('foursquare_id', $place->foursquare_id) }}"
-                   class="w-full border rounded p-2">
-        </div>
-
+       
         <div>
             <label for="image" class="block font-medium">Image</label>
             @if($place->image)

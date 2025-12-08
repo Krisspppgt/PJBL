@@ -6,7 +6,9 @@
 <style>
     .star-rating {
         display: inline-flex;
+        flex-direction: row-reverse;
         gap: 0.25rem;
+        justify-content: flex-end;
     }
     
     .star-rating input {
@@ -15,7 +17,7 @@
     
     .star-rating label {
         cursor: pointer;
-        font-size: 1.5rem;
+        font-size: 2rem;
         color: #d1d5db;
         transition: color 0.2s;
     }
@@ -42,9 +44,9 @@
             <span class="text-yellow-400 text-xl">
                 @for($i = 1; $i <= 5; $i++)
                     @if($i <= floor($place->rating))
-                        &#9733;
+                        ★
                     @else
-                        &#9734;
+                        ☆
                     @endif
                 @endfor
             </span>
@@ -120,53 +122,81 @@
 
         <!-- Reviews Section -->
         <div class="mt-10">
-            <h2 class="text-3xl font-bold text-black mb-6">Reviews ({{ $reviews->count() }})</h2>
+            <h2 class="text-3xl font-bold text-black mb-6">Reviews ({{ $reviews->total() }})</h2>
 
-            <!-- Add Review Form - Only for Logged In Users -->
-            @auth
-            <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 mb-8">
-                <h3 class="text-xl font-bold mb-4">Write Your Review</h3>
-                <form action="{{ route('reviews.store', $place->id) }}" method="POST" id="reviewForm">
-                    @csrf
-                    
-                    <!-- Star Rating -->
-                    <div class="mb-4">
-                        <label class="block font-medium mb-2">Rating</label>
-                        <div class="star-rating">
-                            <input type="radio" id="star5" name="rating" value="5" required />
-                            <label for="star5">★</label>
-                            <input type="radio" id="star4" name="rating" value="4" />
-                            <label for="star4">★</label>
-                            <input type="radio" id="star3" name="rating" value="3" />
-                            <label for="star3">★</label>
-                            <input type="radio" id="star2" name="rating" value="2" />
-                            <label for="star2">★</label>
-                            <input type="radio" id="star1" name="rating" value="1" />
-                            <label for="star1">★</label>
-                        </div>
-                    </div>
+            <!-- Success/Error Messages -->
+            @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-                    <!-- Comment -->
-                    <div class="mb-4">
-                        <label class="block font-medium mb-2">Comment</label>
-                        <textarea name="comment" 
-                                  rows="4" 
-                                  class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" 
-                                  placeholder="Share your experience..."
-                                  required></textarea>
-                    </div>
+            @if(session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-                    <button type="submit" 
-                            class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
-                        Submit Review
-                    </button>
-                </form>
+            @if($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                    <ul class="list-disc list-inside">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+           <!-- Add Review Form - Only for Logged In Users -->
+@auth
+<div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 mb-8">
+    <h3 class="text-xl font-bold mb-4">Write Your Review</h3>
+    
+    <!-- Display Errors -->
+    @if($errors->has('comment'))
+        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            <p class="font-semibold">❌ {{ $errors->first('comment') }}</p>
+        </div>
+    @endif
+    
+    <form action="{{ route('reviews.store', $place->id) }}" method="POST" id="reviewForm">
+        @csrf
+        
+        <!-- Star Rating -->
+        <div class="mb-4">
+            <label class="block font-medium mb-2">Rating</label>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" required />
+                <label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1">★</label>
             </div>
-            @else
-            <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 mb-8 text-center">
-                <p class="text-lg mb-3">Please <a href="{{ route('login') }}" class="text-blue-600 font-bold hover:underline">login</a> to write a review</p>
-            </div>
-            @endauth
+        </div>
+
+        <!-- Comment -->
+        <div class="mb-4">
+            <label class="block font-medium mb-2">Comment</label>
+            <textarea name="comment" 
+                      rows="4" 
+                      class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 @error('comment') border-red-500 @enderror" 
+                      placeholder="Bagikan pengalamanmu... (Jangan gunakan kata-kata kasar)"
+                      required>{{ old('comment') }}</textarea>
+          
+        </div>
+
+        <button type="submit" 
+                class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
+            Submit Review
+        </button>
+    </form>
+</div>
+@endauth
 
             <!-- Reviews List -->
             <div class="space-y-6">
@@ -174,7 +204,7 @@
                 <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-300 transition">
                     <div class="flex items-start gap-4">
                         <!-- User Avatar -->
-                        <div class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center font-bold text-lg">
+                        <div class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center font-bold text-lg shrink-0">
                             {{ substr($review->user->name, 0, 1) }}
                         </div>
                         
@@ -187,16 +217,16 @@
                             
                             <!-- Stars -->
                             <div class="flex items-center gap-2 mb-3">
-                                <span class="text-yellow-400">
+                                <span class="text-yellow-400 text-lg">
                                     @for($i = 1; $i <= 5; $i++)
                                         @if($i <= $review->rating)
-                                            &#9733;
+                                            ★
                                         @else
-                                            &#9734;
+                                            ☆
                                         @endif
                                     @endfor
                                 </span>
-                                <span class="text-gray-600">({{ $review->rating }}.0)</span>
+                                <span class="text-gray-600">({{ $review->rating }}/5)</span>
                             </div>
                             
                             <!-- Comment -->
@@ -210,7 +240,7 @@
                                 <button type="submit" 
                                         onclick="return confirm('Are you sure you want to delete this review?')"
                                         class="text-sm text-red-600 hover:text-red-800 font-medium">
-                                    Delete Review
+                                    🗑️ Delete Review
                                 </button>
                             </form>
                             @endif
@@ -245,7 +275,6 @@ function sharePlace() {
             url: window.location.href
         });
     } else {
-        // Fallback: copy to clipboard
         navigator.clipboard.writeText(window.location.href);
         alert('Link copied to clipboard!');
     }

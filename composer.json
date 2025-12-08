@@ -27,6 +27,11 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
+
+    "files": [
+            "app/Helpers/BadWordsFilter.php"
+        ],
+        
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

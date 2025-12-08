@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\BadWordsFilter;
 
 class ReviewController extends Controller
 {
@@ -35,13 +36,20 @@ class ReviewController extends Controller
             'comment.max' => 'Comment cannot exceed 1000 characters',
         ]);
 
+        // Check for bad words
+        if (BadWordsFilter::containsBadWords($validated['comment'])) {
+            return back()->withErrors([
+                'comment' => 'Jangan berkata kasar ya bang'
+            ])->withInput();
+        }
+
         // Check if user already reviewed this place
         $existingReview = Review::where('user_id', Auth::id())
                                 ->where('place_id', $place->id)
                                 ->first();
 
         if ($existingReview) {
-            return back()->with('error', 'You have already reviewed this place. You can delete your previous review to write a new one.');
+            return back()->with('error','Anda sudah memberikan ulasan');
         }
 
         // Create review
@@ -55,7 +63,7 @@ class ReviewController extends Controller
         // Update place average rating
         $place->updateAverageRating();
 
-        return back()->with('success', 'Thank you for your review!');
+        return back()->with('success', 'Terima kasih telah memberikan ulasan');
     }
 
     /**
@@ -65,7 +73,7 @@ class ReviewController extends Controller
     {
         // Check if user owns this review
         if ($review->user_id !== Auth::id()) {
-            return back()->with('error', 'You can only delete your own reviews.');
+            return back()->with('error', 'Kamu hanya bisa menghapus ulasan milikmu sendiri.');
         }
 
         $place = $review->place;
@@ -76,17 +84,17 @@ class ReviewController extends Controller
         // Update place average rating
         $place->updateAverageRating();
 
-        return back()->with('success', 'Review deleted successfully.');
+        return back()->with('success', 'Ulasan berhasil dihapus.');
     }
 
     /**
-     * Update a review (optional - for edit functionality)
+     * Update a review
      */
     public function update(Request $request, Review $review)
     {
         // Check if user owns this review
         if ($review->user_id !== Auth::id()) {
-            return back()->with('error', 'You can only edit your own reviews.');
+            return back()->with('error', 'Kamu hanya bisa mengedit ulasan milikmu sendiri.');
         }
 
         // Validate input
@@ -95,12 +103,19 @@ class ReviewController extends Controller
             'comment' => 'required|string|min:10|max:1000',
         ]);
 
+        // Check for bad words
+        if (BadWordsFilter::containsBadWords($validated['comment'])) {
+            return back()->withErrors([
+                'comment' => 'Jangan berkata kasar ya bang'
+            ])->withInput();
+        }
+
         // Update review
         $review->update($validated);
 
         // Update place average rating
         $review->place->updateAverageRating();
 
-        return back()->with('success', 'Review updated successfully.');
+        return back()->with('success', 'Ulasan berhasil diperbarui.');
     }
 }

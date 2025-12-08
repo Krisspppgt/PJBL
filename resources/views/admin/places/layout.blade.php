@@ -12,8 +12,8 @@
     <div class="p-6 text-xl font-bold">🍽 KulinerAdmin</div>
     <nav class="mt-4">
       <a href="{{ route('admin.places.index') }}" class="block px-6 py-3 hover:bg-gray-100 {{ request()->routeIs('admin.places.index') ? 'bg-gray-100 font-semibold' : '' }}">Daftar Tempat</a>
-      <a href="{{ route('admin.places.search') }}" class="block px-6 py-3 hover:bg-gray-100 {{ request()->routeIs('admin.places.search') ? 'bg-gray-100 font-semibold' : '' }}">Cari via Foursquare</a>
-      <a href="{{ route('admin.places.create') }}" class="block px-6 py-3 hover:bg-gray-100 {{ request()->routeIs('admin.places.create') ? 'bg-gray-100 font-semibold' : '' }}">Tambah Manual</a>
+
+      <a href="{{ route('admin.places.create') }}" class="block px-6 py-3 hover:bg-gray-100 {{ request()->routeIs('admin.places.create') ? 'bg-gray-100 font-semibold' : '' }}">Tambah</a>
     </nav>
   </aside>
 

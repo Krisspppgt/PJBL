@@ -18,7 +18,7 @@
   <form action="{{ route('admin.places.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
     @csrf
 
-    <input type="hidden" name="foursquare_id" value="{{ $data['foursquare_id'] ?? '' }}">
+   
 
     <div>
       <label class="block mb-1 font-medium">Nama</label>

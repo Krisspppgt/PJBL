@@ -22,7 +22,7 @@ class Place extends Model
         'instagram',
         'opening_hours',
         'image',
-        'foursquare_id',
+        
         'image_url',
     ];
 

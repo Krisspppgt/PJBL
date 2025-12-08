@@ -13,11 +13,10 @@ class PlaceController extends Controller
 {
     protected $fs;
 
-    public function __construct(FoursquareService $fs)
-    {
-        $this->fs = $fs;
-        $this->middleware('auth'); // pastikan user login
-    }
+        public function __construct()
+        {
+            $this->middleware('auth');
+        }
 
     // List
     public function index(Request $request)
@@ -65,7 +64,7 @@ class PlaceController extends Controller
             'phone' => data_get($detail, 'tel'),
             'opening_hours' => json_encode($this->fs->parseOpeningHours($detail)),
             'image_url' => $photoUrl,
-            'foursquare_id' => $fsq_id,
+           
             // Default values untuk field baru
             'instagram' => null,
             'district' => null,
@@ -134,7 +133,7 @@ class PlaceController extends Controller
             'phone' => $v['phone'] ?? null,
             'opening_hours' => $v['opening_hours'] ?? null,
             'price_range' => $request->price_range ?? null,
-            'foursquare_id' => $v['foursquare_id'] ?? null
+           
         ]);
 
         return redirect()->route('admin.places.index')->with('success', 'Tempat berhasil disimpan.');
@@ -161,7 +160,6 @@ class PlaceController extends Controller
             'instagram' => 'nullable|string|max:100',
             'phone' => 'nullable|string|max:20',
             'opening_hours' => 'nullable|string',
-            'foursquare_id' => 'nullable|string',
             'image' => 'nullable|image',
         ]);
 
