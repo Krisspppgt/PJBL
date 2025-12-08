@@ -30,6 +30,7 @@
             
             <!-- District Filter -->
             <select name="district" 
+             
                     class="px-4 py-3 rounded-full text-black outline-none bg-white">
                 <option value="">Semua Kecamatan</option>
                 <option value="Semarang Tengah" {{ request('district') == 'Semarang Tengah' ? 'selected' : '' }}>Semarang Tengah</option>
