@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\Admin\PlaceController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
@@ -30,13 +31,21 @@ Route::get('/comment', function () {
 
 // Admin Routes (hanya untuk admin)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard Admin - redirect ke places
     Route::get('/', function () {
         return redirect()->route('admin.places.index');
     })->name('dashboard');
 
+    // Places Management
     Route::get('places/search', [PlaceController::class, 'search'])->name('places.search');
     Route::get('places/import/{fsq_id}', [PlaceController::class, 'import'])->name('places.import');
     Route::resource('places', PlaceController::class);
+
+    // Reviews Management
+    Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+    Route::get('reviews/{review}/edit', [AdminReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('reviews/{review}', [AdminReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('reviews/{review}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 // Authenticated User Routes (untuk yang sudah login)

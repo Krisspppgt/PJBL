@@ -330,7 +330,7 @@
                 </div>
                 @empty
                 <div class="text-center py-12 bg-gray-50 rounded-xl">
-                    <p class="text-gray-500 text-lg">No reviews yet. Be the first to review!</p>
+                    <p class="text-gray-500 text-lg">Tidak ada Review</p>
                 </div>
                 @endforelse
             </div>
