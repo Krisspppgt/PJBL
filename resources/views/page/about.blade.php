@@ -1,4 +1,4 @@
-@extends('guest.layouts.app')
+@extends(Auth::check() ? 'layouts.navbar' : 'guest.layouts.app')
 
 @section('title', 'About Us - LocalSpot')
 
