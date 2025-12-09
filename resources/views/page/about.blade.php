@@ -26,7 +26,7 @@
 @section('content')
 <!-- Hero Section with Team Photo Background -->
 <section class="min-h-[600px] flex items-center text-white px-8 py-16 relative bg-cover bg-center"
-         style="background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(59, 130, 246, 0.85)), url('{{ asset('images/team-photo.jpg') }}') center/cover; background-size: cover;">
+         style="background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(59, 130, 246, 0.85)), url('{{ asset('images/team-photo.jpeg') }}') center/cover; background-size: cover;">
     <!-- Ganti 'team-photo.jpg' dengan nama file foto team Anda -->
     <div class="max-w-7xl mx-auto w-full">
         <div class="max-w-2xl">

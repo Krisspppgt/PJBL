@@ -18,7 +18,7 @@
   <div class="flex justify-between items-center">
   <div class="flex gap-2">
     <form class="flex gap-2" method="GET">
-      <input name="search" value="{{ request('search') }}" placeholder="Cari..." class="px-3 py-2 border rounded" />
+      <input name="search" value="{{ request('search') }}" placeholder="Cari..." class="w-[20%] lg:w-full px-3 py-2 border rounded" />
       <select name="category" class="px-3 py-2 border rounded">
         <option value="">Semua Kategori</option>
         @foreach(['cafe','restaurant','street-food','bakery','drink-area','catering'] as $cat)
@@ -29,7 +29,7 @@
     </form>
   </div>
   <div class="flex gap-2">
-   
+
     <a href="{{ route('admin.places.create') }}" class="px-3 py-2 bg-blue-600 text-white rounded">Tambah</a>
   </div>
 </div>

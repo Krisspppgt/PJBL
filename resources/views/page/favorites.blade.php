@@ -187,7 +187,7 @@
             <h3>Belum ada tempat favorit</h3>
             <p>Mulai tambahkan tempat favorit Anda dari halaman utama</p>
             <a href="{{ route('homepage') }}" class="inline-block mt-4 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700">
-                <i class="fas fa-search mr-2"></i>Jelajahi Tempat
+                <i class="fa-solid fa-magnifying-glass"></i>Jelajahi Tempat
             </a>
         </div>
     @endif

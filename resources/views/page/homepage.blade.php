@@ -234,7 +234,7 @@
 
     <!-- Search Form with Fixed Z-index -->
     <form action="{{ route('homepage') }}" method="GET" class="w-full max-w-4xl mx-auto mt-6 relative z-10">
-        <div class="flex flex-col items-center md:flex-row justify-center gap-3 w-full">
+        <div class="flex flex-col items-center md:flex-row justify-center gap-4">
             <!-- Input Search -->
             <input
                 type="text"
@@ -248,7 +248,7 @@
             <!-- Dropdown with proper z-index -->
             <select
                 name="district"
-                class="w-[30%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none relative z-20"
+                class="w-[70%] md:w-[40%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none relative z-20"
             >
                 <option value="">Semua Kecamatan</option>
                 @foreach([
@@ -267,7 +267,7 @@
 
             <!-- Tombol Cari -->
             <button type="submit"
-                class="px-8 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 shadow-md flex items-center gap-2">
+                class="px-8 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 shadow-md flex items-center gap-2 w-[70%] md:w-auto justify-center">
                 <i class="fas fa-search"></i> Cari
             </button>
 
@@ -405,8 +405,6 @@
                     <p class="place-description">{{ Str::limit($place->description, 100) }}</p>
                     <div class="place-footer">
                         <div class="place-distance">
-                            <i class="fas fa-route"></i>
-                            <span>{{ $place->distance ?? '2.5' }} km</span>
                         </div>
                         <!-- Tombol Detail -->
                         <a href="/place/{{ $place->id }}" class="btn-detail">
