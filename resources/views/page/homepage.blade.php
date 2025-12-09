@@ -69,6 +69,19 @@
         color: #ef4444;
     }
 
+    @keyframes heartPulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+    }
+
+    .favorite-btn-top.active {
+        animation: heartPulse 0.3s ease-in-out;
+    }
+
     .place-content {
         padding: 1rem;
     }
@@ -219,126 +232,121 @@
     <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
     <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
 
-
     <!-- Search Form -->
-<form action="{{ route('homepage') }}" method="GET"
-    class="w-full max-w-4xl mx-auto mt-6">
+    <form action="{{ route('homepage') }}" method="GET" class="w-full max-w-4xl mx-auto mt-6">
+        <div class="flex items-center justify-center gap-3 w-full">
+            <!-- Input Search -->
+            <input
+                type="text"
+                name="search"
+                id="searchInput"
+                value="{{ request('search') }}"
+                placeholder="Cari nama tempat atau kecamatan..."
+                class="w-[55%] px-6 py-3 rounded-full text-black bg-white shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
+            >
 
-    <div class="flex items-center justify-center gap-3 w-full">
+            <!-- Dropdown -->
+            <select
+                name="district"
+                class="w-[25%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
+            >
+                <option value="">Semua Kecamatan</option>
+                @foreach([
+                    "Semarang Tengah","Semarang Utara","Semarang Timur","Semarang Selatan",
+                    "Semarang Barat","Gayamsari","Genuk","Pedurungan","Tembalang","Banyumanik",
+                    "Gunungpati","Mijen","Ngaliyan","Tugu","Candisari","Gajahmungkur"
+                ] as $dist)
+                    <option value="{{ $dist }}" {{ request('district') == $dist ? 'selected' : '' }}>
+                        {{ $dist }}
+                    </option>
+                @endforeach
+            </select>
 
-    <!-- Input Search -->
-    <input
-        type="text"
-        name="search"
-        value="{{ request('search') }}"
-        placeholder="Cari nama tempat atau kecamatan..."
-        class="w-[55%] px-6 py-3 rounded-full text-black bg-white shadow-md
-        focus:ring-2 focus:ring-amber-500 outline-none"
-    >
+            <!-- Hidden category input -->
+            <input type="hidden" name="category" value="{{ request('category', 'all') }}">
 
-    <!-- Dropdown -->
-    <select
-        name="district"
-        class="w-[25%] px-6 py-3 rounded-full bg-white text-black shadow-md
-            focus:ring-2 focus:ring-amber-500 outline-none"
-    >
-        <option value="">Semua Kecamatan</option>
-        @foreach([
-            "Semarang Tengah","Semarang Utara","Semarang Timur","Semarang Selatan",
-            "Semarang Barat","Gayamsari","Genuk","Pedurungan","Tembalang","Banyumanik",
-            "Gunungpati","Mijen","Ngaliyan","Tugu","Candisari","Gajahmungkur"
-        ] as $dist)
-            <option value="{{ $dist }}" {{ request('district') == $dist ? 'selected' : '' }}>
-                {{ $dist }}
-            </option>
-        @endforeach
-    </select>
+            <!-- Tombol Cari -->
+            <button type="submit"
+                class="px-8 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 shadow-md flex items-center gap-2">
+                <i class="fas fa-search"></i> Cari
+            </button>
 
-    <!-- Tombol Cari -->
-    <button type="submit"
-        class="px-8 py-3 bg-amber-500 text-white rounded-full font-semibold
-        hover:bg-amber-600 shadow-md flex items-center gap-2">
-        <i class="fas fa-search"></i> Cari
-    </button>
-
-    <!-- Tombol Reset -->
-    @if(request('search') || request('district'))
-        <a href="{{ route('homepage') }}"
-            class="px-6 py-3 bg-gray-500 text-white rounded-full font-semibold hover:bg-gray-600 flex items-center whitespace-nowrap">
-                <i class="fas fa-times mr-2"></i> Reset
-        </a>
-    @endif
-</div>
-</form>
-
-
- <!-- #region -->
+            <!-- Tombol Reset -->
+            @if(request('search') || request('district'))
+                <a href="{{ route('homepage') }}?category={{ request('category', 'all') }}"
+                    class="px-6 py-3 bg-gray-500 text-white rounded-full font-semibold hover:bg-gray-600 flex items-center whitespace-nowrap">
+                    <i class="fas fa-times mr-2"></i> Reset
+                </a>
+            @endif
+        </div>
+    </form>
 
     <!-- Active Filters Display -->
-    @if (request('search') || request('district'))
-    <div class="absolute left-1/2 -translate-x-1/2 mt-3
-                flex flex-wrap gap-2 justify-center w-full"
-         style="top: 330px;">
-
+    @if(request('search') || request('district'))
+    <div class="absolute left-1/2 -translate-x-1/2 mt-3 flex flex-wrap gap-2 justify-center w-full" style="top: 330px;">
         @if(request('search'))
-            <span class="px-4 py-2 bg-white/30 backdrop-blur-md border border-white/20
-                         text-white rounded-full text-sm">
+            <span class="px-4 py-2 bg-white/30 backdrop-blur-md border border-white/20 text-white rounded-full text-sm">
                 Pencarian: "{{ request('search') }}"
             </span>
         @endif
 
         @if(request('district'))
-            <span class="px-4 py-2 bg-white/30 backdrop-blur-md border border-white/20
-                         text-white rounded-full text-sm">
+            <span class="px-4 py-2 bg-white/30 backdrop-blur-md border border-white/20 text-white rounded-full text-sm">
                 Kecamatan: {{ request('district') }}
             </span>
         @endif
     </div>
-@endif
-
+    @endif
 </section>
 
 <!-- Categories -->
 <section class="-mt-16 relative z-10 w-full">
     <div class="w-full bg-[#183883] rounded-t-xl p-6 shadow-lg">
        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 p-6">
-            <a href="?category=all" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'all' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=all{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'all' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'all' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-th"></i>
                 </div>
                 <span class="font-semibold text-sm">All</span>
             </a>
-            <a href="?category=cafe" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'cafe' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=cafe{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'cafe' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'cafe' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-coffee"></i>
                 </div>
                 <span class="font-semibold text-sm">Cafe</span>
             </a>
-            <a href="?category=restaurant" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'restaurant' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=restaurant{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'restaurant' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'restaurant' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-utensils"></i>
                 </div>
                 <span class="font-semibold text-sm">Restaurant</span>
             </a>
-            <a href="?category=street-food" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'street-food' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=street-food{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'street-food' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'street-food' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-hamburger"></i>
                 </div>
                 <span class="font-semibold text-sm">Street Food</span>
             </a>
-            <a href="?category=bakery" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'bakery' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=bakery{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'bakery' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'bakery' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-bread-slice"></i>
                 </div>
                 <span class="font-semibold text-sm">Bakery</span>
             </a>
-            <a href="?category=drink-area" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'drink-area' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=drink-area{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'drink-area' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'drink-area' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-glass-cheers"></i>
                 </div>
                 <span class="font-semibold text-sm">Drink Area</span>
             </a>
-            <a href="?category=catering" class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'catering' ? 'bg-white text-amber-500' : 'text-white' }}">
+            <a href="?category=catering{{ request('search') ? '&search='.request('search') : '' }}{{ request('district') ? '&district='.request('district') : '' }}"
+               class="flex flex-col items-center gap-2 p-4 rounded-lg transition transform hover:-translate-y-1 {{ $category == 'catering' ? 'bg-white text-amber-500' : 'text-white' }}">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'catering' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
                     <i class="fas fa-concierge-bell"></i>
                 </div>
@@ -428,20 +436,43 @@
 <script>
 // Toggle Favorite Function
 function toggleFavorite(placeId, button) {
+    // Get CSRF token
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+    if (!csrfToken) {
+        console.error('CSRF token not found!');
+        showNotification('CSRF token tidak ditemukan', 'error');
+        return;
+    }
+
+    console.log('Toggling favorite for place:', placeId); // Debug
+    console.log('Button element:', button); // Debug
+    console.log('Button has active class:', button.classList.contains('active')); // Debug
+
     fetch(`/favorites/toggle/${placeId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'X-CSRF-TOKEN': csrfToken.getAttribute('content')
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Response status:', response.status); // Debug
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Response data:', data); // Debug
+
         // Update button appearance
         if (data.status === 'added') {
             button.classList.add('active');
+            console.log('Added active class'); // Debug
         } else {
             button.classList.remove('active');
+            console.log('Removed active class'); // Debug
         }
 
         // Show notification
@@ -449,7 +480,7 @@ function toggleFavorite(placeId, button) {
     })
     .catch(error => {
         console.error('Error:', error);
-        showNotification('Terjadi kesalahan', 'error');
+        showNotification('Terjadi kesalahan: ' + error.message, 'error');
     });
 }
 
@@ -466,7 +497,7 @@ function showNotification(message, type = 'success') {
 
     notification.style.background = colors[type] || colors.success;
 
-    const icon = type = == 'success' ? '✓' : type === 'info' ? 'ℹ' : '✗';
+    const icon = type === 'success' ? '✓' : type === 'info' ? 'ℹ' : '✗';
     notification.innerHTML = `
         <div style="display: flex; align-items: center; gap: 0.5rem;">
             <span style="font-size: 1.25rem;">${icon}</span>
@@ -493,10 +524,17 @@ function searchPlaces() {
 }
 
 // Enter key to search
-document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        searchPlaces();
-    }
-});
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            searchPlaces();
+        }
+    });
+}
+
+// Debug: Check if script loaded
+console.log('Homepage scripts loaded successfully');
 </script>
 @endsection
