@@ -3,9 +3,6 @@
 @section('title', 'Beranda - LocalSpot')
 
 @section('styles')
-<<<<<<< HEAD
-    {{-- Styles converted to Tailwind utilities in markup; keep this section if you want to add small inline CSS later --}}
-=======
 <style>
     .places-grid {
         display: grid;
@@ -226,72 +223,18 @@
         }
     }
 </style>
->>>>>>> 1a303e1d6ed057eb685246f096f2cddbd1e89ce9
 @endsection
-<head>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
 
 @section('content')
 <!-- Hero Section -->
-<section class="min-h-[450px] flex flex-col justify-center items-center text-white text-center p-8"
-         style="background: linear-gradient(rgba(0,0,0,0.4), rgba(255, 255, 255, 0.4)), center/cover;"
-         src="{{ asset('images/logo.jpeg') }}">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
-    <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
-
-    <div class="flex gap-4 max-w-2xl w-full">
-        <input type="text" placeholder="Cari spot ternyamanmu.." class="flex-1 px-4 py-3 rounded-full text-black outline-none" />
-        <button class="px-6 py-3 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600">
-            <i class="fas fa-search mr-2"></i> Cari
-        </button>
-    </div>
-</section>
-
-<!-- Categories -->
-<section class="-mt-12">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 bg-blue-900 p-6 rounded-xl shadow-lg">
-        <a href="?category=all" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'all' ? 'bg-white' : 'text-white' }}">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'all' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                <i class="fas fa-th"></i>
-            </div>
-            <span class="font-semibold text-sm">All</span>
-        </a>
-        <a href="?category=cafe" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'cafe' ? 'bg-white' : 'text-white' }}">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'cafe' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                <i class="fas fa-coffee"></i>
-            </div>
-            <span class="font-semibold text-sm">Cafe</span>
-        </a>
-        <a href="?category=restaurant" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'restaurant' ? 'bg-white ' : 'text-white' }}">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'restaurant' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                <i class="fas fa-utensils"></i>
-            </div>
-            <span class="font-semibold text-sm">Restaurant</span>
-        </a>
-        <a href="?category=street-food" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'street-food' ? 'bg-white ' : 'text-white' }}">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'street-food' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                <i class="fas fa-hamburger"></i>
-            </div>
-            <span class="font-semibold text-sm">Street Food</span>
-        </a>
-        <a href="?category=bakery" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'bakery' ? 'bg-white' : 'text-white' }}">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'bakery' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                <i class="fas fa-bread-slice"></i>
-            </div>
-            <span class="font-semibold text-sm">Bakery</span>
-        </a>
-          <a href="?category=drink-area" class="flex flex-col items-center gap-2 p-4 rounded-lg text-amber-500 transition transform hover:-translate-y-1 {{ $category == 'drink-area' ? 'bg-white' : 'text-white' }}">
-                <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg {{ $category == 'drink-area' ? 'bg-amber-500 text-white' : 'bg-white text-amber-500' }}">
-                    <i class="fas fa-glass-cheers"></i>
-                    <"style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('{{ asset('images/hero-background.jpeg') }}');">
+<section class="min-h-[450px] flex flex-col justify-center items-center text-white text-center p-8 pb-32 relative bg-cover bg-center"
+         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('{{ asset('images/hero-background.jpeg') }}');">
     <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
     <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
 
     <!-- Search Form with Fixed Z-index -->
     <form action="{{ route('homepage') }}" method="GET" class="w-full max-w-4xl mx-auto mt-6 relative z-10">
-        <div class="flex items-center justify-center gap-3 w-full">
+        <div class="flex flex-col items-center md:flex-row justify-center gap-3 w-full">
             <!-- Input Search -->
             <input
                 type="text"
@@ -299,13 +242,13 @@
                 id="searchInput"
                 value="{{ request('search') }}"
                 placeholder="Cari nama tempat atau kecamatan..."
-                class="w-[55%] px-6 py-3 rounded-full text-black bg-white shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
+                class="w-[70%] px-6 py-3 rounded-full text-black bg-white shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
             >
 
             <!-- Dropdown with proper z-index -->
             <select
                 name="district"
-                class="w-[25%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none relative z-20"
+                class="w-[30%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none relative z-20"
             >
                 <option value="">Semua Kecamatan</option>
                 @foreach([
@@ -542,9 +485,6 @@ function showNotification(message, type = 'success') {
 
     notification.style.background = colors[type] || colors.success;
 
-<<<<<<< HEAD
-    const icon = type = == 'success' ? '✓' : type === 'info' ? 'ℹ' : '✗';
-=======
     const icon = type === 'success' ? '✓' : type === 'info' ? 'ℹ' : '✗';
     notification.innerHTML = `
         <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -583,4 +523,3 @@ if (searchInput) {
 }
 </script>
 @endsection
->>>>>>> 1a303e1d6ed057eb685246f096f2cddbd1e89ce9
