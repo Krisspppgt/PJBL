@@ -289,8 +289,8 @@
     <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Menampilkan berbagai spot</h1>
     <p class="text-lg md:text-xl mb-6 drop-shadow">Temukan spot favorit mu di sekitarmu</p>
 
-    <!-- Search Form -->
-    <form action="{{ route('homepage') }}" method="GET" class="w-full max-w-4xl mx-auto mt-6">
+    <!-- Search Form with Fixed Z-index -->
+    <form action="{{ route('homepage') }}" method="GET" class="w-full max-w-4xl mx-auto mt-6 relative z-10">
         <div class="flex items-center justify-center gap-3 w-full">
             <!-- Input Search -->
             <input
@@ -302,10 +302,10 @@
                 class="w-[55%] px-6 py-3 rounded-full text-black bg-white shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
             >
 
-            <!-- Dropdown -->
+            <!-- Dropdown with proper z-index -->
             <select
                 name="district"
-                class="w-[25%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none"
+                class="w-[25%] px-6 py-3 rounded-full bg-white text-black shadow-md focus:ring-2 focus:ring-amber-500 outline-none relative z-20"
             >
                 <option value="">Semua Kecamatan</option>
                 @foreach([
@@ -493,7 +493,6 @@
 <script>
 // Toggle Favorite Function
 function toggleFavorite(placeId, button) {
-    // Get CSRF token
     const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
     if (!csrfToken) {
@@ -501,10 +500,6 @@ function toggleFavorite(placeId, button) {
         showNotification('CSRF token tidak ditemukan', 'error');
         return;
     }
-
-    console.log('Toggling favorite for place:', placeId); // Debug
-    console.log('Button element:', button); // Debug
-    console.log('Button has active class:', button.classList.contains('active')); // Debug
 
     fetch(`/favorites/toggle/${placeId}`, {
         method: 'POST',
@@ -514,25 +509,18 @@ function toggleFavorite(placeId, button) {
         }
     })
     .then(response => {
-        console.log('Response status:', response.status); // Debug
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response.json();
     })
     .then(data => {
-        console.log('Response data:', data); // Debug
-
-        // Update button appearance
         if (data.status === 'added') {
             button.classList.add('active');
-            console.log('Added active class'); // Debug
         } else {
             button.classList.remove('active');
-            console.log('Removed active class'); // Debug
         }
 
-        // Show notification
         showNotification(data.message, data.status === 'added' ? 'success' : 'info');
     })
     .catch(error => {
@@ -593,9 +581,6 @@ if (searchInput) {
         }
     });
 }
-
-// Debug: Check if script loaded
-console.log('Homepage scripts loaded successfully');
 </script>
 @endsection
 >>>>>>> 1a303e1d6ed057eb685246f096f2cddbd1e89ce9

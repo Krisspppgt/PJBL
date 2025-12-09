@@ -101,7 +101,7 @@
         @endif
     </div>
     @endif
-</section> 
+</section>
 
 <!-- Categories -->
 <section class="-mt-16 relative z-10 w-full">
@@ -209,8 +209,6 @@
                     <!-- Footer -->
                     <div class="flex items-center justify-between pt-3 border-t border-slate-200">
                         <div class="flex items-center gap-2 text-sm text-slate-600">
-                            <i class="fas fa-route text-blue-500"></i>
-                            <span class="font-semibold">{{ $place->distance ?? '2.5' }} km</span>
                         </div>
                         <button onclick="showLoginPrompt()"
                                 class="px-4 py-2 bg-amber-500 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors duration-200 flex items-center gap-2 text-sm">
