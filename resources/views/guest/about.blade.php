@@ -1,4 +1,4 @@
-@extends(Auth::check() ? 'layouts.navbar' : 'guest.layouts.app')
+@extends('guest.layouts.navbar')
 
 @section('title', 'About Us - LocalSpot')
 
@@ -26,13 +26,13 @@
 @section('content')
 <!-- Hero Section with Team Photo Background -->
 <section class="min-h-[600px] flex items-center text-white px-8 py-16 relative bg-cover bg-center"
-         style="background: url('{{ asset('images/team-photo.jpeg') }}') center/cover; background-size: cover;">
+         style="background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(59, 130, 246, 0.85)), url('{{ asset('images/team-photo.jpg') }}') center/cover; background-size: cover;">
     <!-- Ganti 'team-photo.jpg' dengan nama file foto team Anda -->
     <div class="max-w-7xl mx-auto w-full">
         <div class="max-w-2xl">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">HALO! KAMI ADALAH<br>TIM SATU</h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">HELLO! WE ARE<br>TEAM ONE</h1>
             <p class="text-lg md:text-xl mb-8 leading-relaxed drop-shadow-lg">
-                Kami adalah tim siswa SMKN 8 Semarang yang penuh semangat, berdedikasi untuk menciptakan solusi digital yang mendukung bisnis kuliner lokal. Bersama-sama, kami menggabungkan kreativitas, teknologi, dan kolaborasi untuk membangun Local Spot bagi masyarakat.
+                We are a passionate student team from SMKN 8 Semarang, dedicated to creating digital solutions that support local culinary businesses. Together, we combine creativity, technology, and collaboration to build Local Spot for the community.
             </p>
             <a href="mailto:localspot13@gmail.com"
                class="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
@@ -50,12 +50,12 @@
     <div class="max-w-6xl mx-auto px-8">
         <div class="flex flex-col md:flex-row items-start md:items-center gap-12">
             <div class="flex-shrink-0 md:w-1/3">
-                <h2 class="text-4xl font-bold text-white mb-2">VISI KAMI</h2>
+                <h2 class="text-4xl font-bold text-white mb-2">OUR VISION</h2>
                 <div class="w-20 h-1 bg-amber-500"></div>
             </div>
             <div class="flex-1 md:w-2/3">
                 <p class="text-xl text-gray-300 leading-relaxed">
-                    Menjadi platform digital paling tepercaya yang menghubungkan masyarakat dengan pengalaman kuliner lokal yang autentik sekaligus memberdayakan UMKN untuk berkembang melalui solusi teknologi inovatif.
+                    To become the most trusted digital platform that connects communities with authentic local culinary experiences while empowering UMKN to grow through innovative technology solutions.
                 </p>
             </div>
         </div>
@@ -67,8 +67,11 @@
 <!-- Why Choose Section (from image) -->
 <section class="bg-gray-900 py-16">
     <div class="max-w-6xl mx-auto px-8">
-        <h2 class="text-4xl font-bold text-center text-white mb-4">MENGAPA MEMILIH LOCAL SPOT?</h2>
+        <h2 class="text-4xl font-bold text-center text-white mb-4">WHY CHOOSE LOCAL SPOT?</h2>
         <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
+            We leverage cutting-edge digital platforms to connect communities with authentic local culinary experiences, while empowering UMKN to grow through visibility and authentic brand storytelling.
+        </p>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Feature 1 -->
             <div class="feature-card bg-gray-800 rounded-2xl p-8 shadow-lg text-center border border-gray-700">
@@ -77,9 +80,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Tempat Akurat</h3>
+                <h3 class="text-xl font-bold text-white mb-3">Trusted Always</h3>
                 <p class="text-gray-400">
-                     Local Spot menampilkan lokasi kuliner berdasarkan peta asli.
+                    We curate and verify every culinary spot to ensure authentic and quality experiences for our community.
                 </p>
             </div>
 
@@ -90,9 +93,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Review Pengguna</h3>
+                <h3 class="text-xl font-bold text-white mb-3">Elevating Recognition</h3>
                 <p class="text-gray-400">
-                    Penilaian dan komentar dibuat oleh pengguna terdaftar, lebih jujur dan dapat dipercaya.
+                    We spotlight hidden gems and help local UMKN gain the recognition they deserve in the digital space.
                 </p>
             </div>
 
@@ -103,9 +106,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Support UMKN</h3>
+                <h3 class="text-xl font-bold text-white mb-3">Impactful Support</h3>
                 <p class="text-gray-400">
-                    Local Spot fokus menampilkan kuliner lokal di Semarang, sehingga semakin banyak orang dapat menemukan dan mencoba
+                    Our platform drives real growth for local businesses through increased visibility and community engagement.
                 </p>
             </div>
         </div>
@@ -115,7 +118,9 @@
 <!-- Meet The Team Section -->
 <section class="bg-white py-16">
     <div class="max-w-6xl mx-auto px-8">
-        <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">TEAM KAMI</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">MEET THE TEAM</h2>
+        <p class="text-center text-gray-600 mb-12">The creative minds behind Local Spot</p>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Team Member 1 -->
 <div class="team-card bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 shadow-lg text-center border border-gray-100">

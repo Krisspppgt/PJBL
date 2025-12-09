@@ -88,7 +88,7 @@
 
     .place-category {
         display: inline-block;
-        background: #3b82f6;
+        background: oklch(76.9% 0.188 70.08);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 12px;
@@ -165,7 +165,7 @@
     }
 
     .btn-detail {
-        background: #3b82f6;
+        background: oklch(76.9% 0.188 70.08);
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 8px;
@@ -405,6 +405,7 @@
                     <p class="place-description">{{ Str::limit($place->description, 100) }}</p>
                     <div class="place-footer">
                         <div class="place-distance">
+
                         </div>
                         <!-- Tombol Detail -->
                         <a href="/place/{{ $place->id }}" class="btn-detail">
